@@ -1,11 +1,11 @@
-import Exercise from "../../types/Exercise";
 import * as css from "./workout_card.scss";
 import SetBubble from "../SetBubble/SetBubble";
 import {useContext} from "react";
 import ProgramOverviewContext from "../../screens/ProgramOverview/ProgramOverviewContext";
+import ForgedExercise from "@armory/forge/forged/ForgedExercise";
 
 type WorkoutCardRowProps = {
-    exercise: Exercise,
+    exercise: ForgedExercise,
 }
 
 const WorkoutCardRow = (props: WorkoutCardRowProps) => {

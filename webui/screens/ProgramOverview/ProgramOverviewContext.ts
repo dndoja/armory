@@ -1,5 +1,5 @@
 import React from 'react'
-import ExerciseVisibilityMap from "../../types/ExerciseVisibilityMap";
+import ExerciseVisibilityMap from "../../models/ExerciseVisibilityMap";
 
 export interface ProgramOverviewContextProps {
     exerciseVisibilityMap: ExerciseVisibilityMap;

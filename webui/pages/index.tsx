@@ -1,8 +1,4 @@
-import WorkoutCard from "../components/WorkoutCard/WorkoutCard";
-import WorkoutProgram, {getExerciseSummary} from "../types/WorkoutProgram";
-import CollapsableSection from "../components/CollapsableSection/CollapsableSection";
 import {ProgramOverviewContextProvider} from "../screens/ProgramOverview/ProgramOverviewContext";
-import Modal from 'react-modal';
 import {useState} from "react";
 import ExerciseOverviewModal from "../components/ExerciseOverview/ExerciseOverviewModal";
 import NavbarIcon from "../components/Navbar/NavbarIcon";
@@ -12,19 +8,12 @@ import Drawer from "../components/Drawer/Drawer";
 import TrainingMaxesDrawer from "../components/TrainingMaxesDrawer/TrainingMaxesDrawer";
 import "../public/styles/input.scss"
 import ExerciseVisibilityDrawer from "../components/ExerciseVisibilityDrawer/ExerciseVisibilityDrawer";
-import ExerciseVisibilityMap from "../types/ExerciseVisibilityMap";
-import data from "../public/programs/building_the_monolith.json";
+import ExerciseVisibilityMap, {fromProgram} from "../models/ExerciseVisibilityMap";
+import {forge} from "@armory/forge/Forge";
+import {getExerciseOverview} from "@armory/forge/forged/Utilities";
 
-const toggledMap: ExerciseVisibilityMap = {};
-const program: WorkoutProgram = data;
-program.blocks.forEach(block => {
-    block.weeks.forEach(week => week.workouts.forEach(workout => {
-        workout.exercises.forEach(exercise => {
-            toggledMap[exercise.id] = {visible:true,name:exercise.name};
-        })
-    }))
-});
-
+const program = forge();
+const toggledMap: ExerciseVisibilityMap = fromProgram(program);
 
 const Home = () => {
     const [modalState,setModalState] = useState({isOpen: false, exerciseId: ''});
@@ -60,7 +49,7 @@ const Home = () => {
             <ExerciseVisibilityDrawer isOpen={isVisibilityDrawerOpen} onRequestClose={() => setIsVisibilityDrawerOpen(false)} program={program}/>
             <ExerciseOverviewModal
                 isOpen={modalState.isOpen}
-                exerciseSummary={getExerciseSummary(program,modalState.exerciseId)}
+                exerciseSummary={getExerciseOverview(program,modalState.exerciseId)}
                 onRequestClose={() => setModalState({...modalState,isOpen: false})}
             />
             <div style={isVisibilityDrawerOpen ? {overflow:'hidden', height:'90vh'} : {}}>

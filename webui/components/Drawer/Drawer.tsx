@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import * as css from "./drawer.scss";
-import ModalProps from "../../types/ModalProps";
+import ModalProps from "../../models/ModalProps";
 import {Scrollbar} from "react-scrollbars-custom";
 import {func} from "prop-types";
 

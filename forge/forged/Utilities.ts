@@ -1,16 +1,16 @@
-import ProgramBlock from "./ProgramBlock";
-import ExerciseOverview from "./ExerciseOverview";
-import WorkoutSet from "./WorkoutSet";
+import ExerciseSet from "../workout_sets/ExerciseSet";
+import ExerciseOverview from "../ExerciseOverview";
+import {ForgedProgram} from "./ForgedProgram";
 
 /**
  * This function is very inefficient but the iteration count doesn't even reach 2000 so it doesn't really matter.
  */
-export function getExerciseSummary(program: WorkoutProgram, exerciseId: string) {
-    const sets: [string,WorkoutSet[]][] = [];
+export function getExerciseOverview(program: ForgedProgram, exerciseId: string) {
+    const sets: [string,ExerciseSet[]][] = [];
     let name: string = undefined;
     program.blocks.forEach(block => {
         block.weeks.forEach((week,index) => {
-            week.workouts.forEach(workout => {
+            week.days.forEach(workout => {
                 const exercise = workout.exercises.find(exercise => exercise.id === exerciseId);
                 if (exercise) {
                     name = exercise.name;
@@ -26,10 +26,3 @@ export function getExerciseSummary(program: WorkoutProgram, exerciseId: string) 
     return new ExerciseOverview(exerciseId,name,sets)
 }
 
-export default class WorkoutProgram {
-    blocks: ProgramBlock[];
-
-    constructor(blocks: ProgramBlock[]) {
-        this.blocks = blocks;
-    }
-}

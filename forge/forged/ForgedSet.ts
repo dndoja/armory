@@ -1,4 +1,4 @@
-class WorkoutSet {
+class ForgedSet {
     reps: string;
     weight: string;
 
@@ -8,4 +8,4 @@ class WorkoutSet {
     }
 }
 
-export default WorkoutSet;
+export default ForgedSet;

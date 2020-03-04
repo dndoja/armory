@@ -1,8 +1,8 @@
-import ExerciseOverview from "../../types/ExerciseOverview";
+import ExerciseOverview from "../../models/ExerciseOverview";
 import * as css from "./exercise_overview.scss";
 import SetBubble from "../SetBubble/SetBubble";
 import Modal from 'react-modal';
-import ModalProps from "../../types/ModalProps";
+import ModalProps from "../../models/ModalProps";
 import {Scrollbar} from "react-scrollbars-custom";
 
 const modalStyle = {

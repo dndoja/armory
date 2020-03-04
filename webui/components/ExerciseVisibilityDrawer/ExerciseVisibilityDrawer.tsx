@@ -1,16 +1,16 @@
 import {FunctionComponent, useContext, useState} from "react";
 import Drawer, {DrawerType} from "../Drawer/Drawer";
-import ModalProps from "../../types/ModalProps";
+import ModalProps from "../../models/ModalProps";
 import VisibilityToggle from "./VisibilityToggle/VisibilityToggle";
 import ProgramOverviewContext from "../../screens/ProgramOverview/ProgramOverviewContext";
-import WorkoutProgram from "../../types/WorkoutProgram";
 import CollapsableSection from "../CollapsableSection/CollapsableSection";
 import * as css from "./exercise_visibility_drawer.scss"
+import {ForgedProgram} from "@armory/forge/forged/ForgedProgram";
 
 class TrainingMaxesDrawerProps implements ModalProps{
     isOpen: boolean;
     onRequestClose: () => void;
-    program: WorkoutProgram
+    program: ForgedProgram
 }
 
 const ExerciseVisibilityDrawer: FunctionComponent<TrainingMaxesDrawerProps> = (props) => {
@@ -28,7 +28,7 @@ const ExerciseVisibilityDrawer: FunctionComponent<TrainingMaxesDrawerProps> = (p
                             <CollapsableSection title={'Block ' + (blockIndex + 1)}>
                                 <div className={css.content}>
                                 {
-                                    block.weeks[0].workouts.map((workout, index) => {
+                                    block.weeks[0].days.map((workout, index) => {
                                         return (
                                             <div className={css.column}>
                                                 <p className={css.dayLabel}>Day {index + 1}</p>

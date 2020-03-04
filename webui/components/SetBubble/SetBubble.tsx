@@ -1,8 +1,8 @@
 import * as css from './set_bubble.scss'
-import WorkoutSet from "../../types/WorkoutSet";
+import ExerciseSet from "@armory/forge/workout_sets/ExerciseSet";
 
 type SetBubbleProps = {
-    set: WorkoutSet,
+    set: ExerciseSet,
 }
 
 const SetBubble = (props: SetBubbleProps) => {

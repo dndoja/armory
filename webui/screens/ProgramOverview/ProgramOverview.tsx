@@ -1,9 +1,9 @@
-import WorkoutProgram from "../../types/WorkoutProgram";
 import CollapsableSection from "../../components/CollapsableSection/CollapsableSection";
 import WorkoutCard from "../../components/WorkoutCard/WorkoutCard";
 import Divider from "../../components/Divider/Divider";
+import {ForgedProgram} from "@armory/forge/forged/ForgedProgram";
 
-const ProgramOverview = (props: WorkoutProgram) => <div>
+const ProgramOverview = (props: ForgedProgram) => <div>
     {
         props.blocks.map(block => {
             return (
@@ -15,9 +15,9 @@ const ProgramOverview = (props: WorkoutProgram) => <div>
                                     {
                                         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                                             {
-                                                week.workouts.map((workout,index) => [
+                                                week.days.map((workout,index) => [
                                                      <WorkoutCard workout={workout}/>,
-                                                    index < week.workouts.length -1 ? <Divider/> : null
+                                                    index < week.days.length -1 ? <Divider/> : null
                                                 ])
                                             }
                                         </div>

@@ -6,39 +6,40 @@ import TMaxVaryingSet from "../workout_sets/TMaxVaryingSet";
 import {FixedProgression} from "../progressions/FixedProgression";
 import {IdMap} from "../common/IdMap";
 import Matrix, {createMatrix} from "../common/Matrix";
+import ExerciseSet from "../workout_sets/ExerciseSet";
 
 export default class BlockBlueprint {
     readonly totalWeeks: number;
     readonly trainingDaysPerWeek: number;
     private readonly blueprintIdToExerciseIdMap: Matrix<string>;
-    private readonly daysToExerciseIdsMap: Matrix<string>;
+    private readonly daysToExerciseIdsMatrix: Matrix<string>;
     private readonly exercisesMap: IdMap<Exercise>;
-    private readonly exercisesToProgressionMap: IdMap<Progression>;
+    private readonly exercisesToProgressionMatrix: IdMap<Progression>;
 
     constructor(totalWeeks: number, trainingDaysPerWeek: number) {
         this.totalWeeks = totalWeeks;
         this.trainingDaysPerWeek = trainingDaysPerWeek;
-        this.daysToExerciseIdsMap = createMatrix(trainingDaysPerWeek);
+        this.daysToExerciseIdsMatrix = createMatrix(trainingDaysPerWeek);
         this.blueprintIdToExerciseIdMap = createMatrix();
         this.exercisesMap = {};
-        this.exercisesToProgressionMap = {};
+        this.exercisesToProgressionMatrix = {};
     }
 
     public log(){
-        console.log(this.exercisesToProgressionMap)
+        console.log(this.exercisesToProgressionMatrix)
     }
 
-    public addExerciseForDay(blueprint: ExerciseBlueprint, day: number, progression: Progression) {
-        const id = uuid();
-        this.exercisesMap[id] = blueprint;
-        this.daysToExerciseIdsMap[day].push(id);
-        this.blueprintIdToExerciseIdMap[blueprint.id] = id;
-        this.exercisesToProgressionMap[id] = progression;
+    addExerciseForDay(blueprint: ExerciseBlueprint, day: number, progression: Progression) {
+        const exerciseId = uuid();
+        this.exercisesMap[exerciseId] = blueprint;
+        this.daysToExerciseIdsMatrix[day].push(exerciseId);
+        this.blueprintIdToExerciseIdMap[blueprint.id] = exerciseId;
+        this.exercisesToProgressionMatrix[exerciseId] = progression;
     }
 
-    public updateTrainingMaxForBlueprint(blueprintId: string, newTrainingMax: number){
+    updateTrainingMaxForBlueprint(blueprintId: string, newTrainingMax: number){
         const exerciseId = this.blueprintIdToExerciseIdMap[blueprintId];
-        const progression = this.exercisesToProgressionMap[exerciseId];
+        const progression = this.exercisesToProgressionMatrix[exerciseId];
         if (progression instanceof FixedProgression){
             progression.getAllSets().forEach(set => {
                 if (set instanceof TMaxVaryingSet){
@@ -46,5 +47,13 @@ export default class BlockBlueprint {
                 }
             })
         }
+    }
+
+    getExerciseIdsForDay(day: number): string[]{
+        return this.daysToExerciseIdsMatrix[day]
+    }
+
+    getSetsForExerciseInWeek(exerciseId: string, week: number): ExerciseSet[]{
+        return this.exercisesToProgressionMatrix[exerciseId].getSetsAtWeek(week)
     }
 }

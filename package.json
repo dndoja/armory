@@ -6,6 +6,7 @@
   "private": true,
   "workspaces":["webui","forge"],
   "scripts": {
+	"dev":"yarn workspace @armory/webui dev",
     "postinstall": "sed -i 's/followSymlinks: false/followSymlinks: true/g' node_modules/watchpack/lib/DirectoryWatcher.js"
   }
 }

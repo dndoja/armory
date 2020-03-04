@@ -1,9 +1,9 @@
 import * as css from "./workout_card.scss"
-import Workout from "../../types/Workout";
 import WorkoutCardRow from "./WorkoutCardRow";
+import {ForgedDay} from "@armory/forge/forged/ForgedProgram";
 
 type WorkoutCardProps = {
-    workout: Workout,
+    workout: ForgedDay,
 }
 
 const WorkoutCard = (props: WorkoutCardProps) => {

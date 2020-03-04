@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import Drawer, {DrawerType} from "../Drawer/Drawer";
-import ModalProps from "../../types/ModalProps";
+import ModalProps from "../../models/ModalProps";
 import RepsWeightField from "./RepsWeightField";
 
 class TrainingMaxesDrawerProps implements ModalProps{
