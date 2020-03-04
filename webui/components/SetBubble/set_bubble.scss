@@ -1,0 +1,38 @@
+@import "public/styles/styles";
+
+$bubbleWidth: 2.5rem;
+
+.innerText{
+  @include regular-text;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+}
+
+%circle{
+  padding: 4px 8px;
+  margin: 4px 8px 4px 0;
+  height: $bubbleWidth;
+  min-width: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.circlePrimary{
+  @extend %circle;
+  background-color: $primary;
+}
+
+.circleSecondary{
+  @extend %circle;
+  background-color: $secondary;
+}
+
+.container{
+  padding: 4px;
+  width: $bubbleWidth;
+}

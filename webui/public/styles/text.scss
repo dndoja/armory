@@ -1,0 +1,34 @@
+@import "variables";
+
+:global(body) {
+  background-color: $background;
+  padding-top: 50px;
+}
+
+@mixin regular-text{
+  font-family: $font;
+  color: $textColor;
+  margin: 0;
+}
+
+@mixin light-text {
+  @include regular-text;
+  font-weight: 300;
+}
+
+@mixin medium-text {
+  @include regular-text;
+  font-weight: 500;
+}
+
+@mixin bold-text {
+  @include regular-text;
+  font-weight: 600;
+}
+
+@mixin unselectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

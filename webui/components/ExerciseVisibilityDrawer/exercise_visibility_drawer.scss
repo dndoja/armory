@@ -1,0 +1,23 @@
+@import "public/styles/styles";
+
+.content{
+  width: calc(100% - 64px);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px;
+}
+
+.dayLabel{
+  @include medium-text;
+  color: $secondaryTextColor;
+  font-size: 1rem;
+  margin: 0 0 16px;
+}
+
+.column{
+  margin-right: 2vw;
+  margin-bottom: 4vh;
+}

@@ -1,0 +1,27 @@
+@import "../../../public/styles/styles";
+
+.label {
+  @include regular-text;
+  font-size: 1.5rem;
+}
+
+.icon {
+  font-size: 1rem;
+  color: $textColor;
+  cursor: pointer;
+  padding-right: 1rem;
+}
+
+.toggledOn{
+  color: $textColor;
+}
+
+.toggledOff{
+  color: $secondaryTextColor;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

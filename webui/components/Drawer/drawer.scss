@@ -1,0 +1,88 @@
+@import "public/styles/styles";
+
+$drawerWidth: 25vw;
+$drawerHeight: 100%;
+
+.title{
+  @include medium-text;
+  font-size: 1.5rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.subtitle{
+  @include regular-text;
+  color: $secondaryTextColor;
+  margin-bottom: 32px;
+}
+
+.headerContainer{
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 16px;
+  margin-bottom: 8px;
+}
+
+.closeIcon {
+  color: $textColor;
+  white-space: nowrap;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.content{
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.innerContent{
+  flex:1;
+}
+
+@mixin drawer{
+  position: fixed;
+  z-index: 3;
+  background-color: #4A484F;
+}
+
+@mixin drawerVertical{
+  @include drawer;
+  width: $drawerWidth;
+  top: 0;
+  bottom: 0;
+  transition: right 0.1s ease-out;
+}
+
+@mixin drawerHorizontal{
+  @include drawer;
+  height: $drawerHeight;
+  right: 0;
+  left: 0;
+  transition: top 0.1s ease-out;
+}
+
+.verticalOpen{
+  @include drawerVertical;
+  right: 0;
+}
+
+.verticalClosed{
+  @include drawerVertical;
+  right: -$drawerWidth;
+}
+
+.horizontalOpen{
+  @include drawerHorizontal;
+  top: 0;
+}
+
+.horizontalClosed{
+  @include drawerHorizontal;
+  top: -$drawerHeight;
+}

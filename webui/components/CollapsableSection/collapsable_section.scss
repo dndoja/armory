@@ -1,0 +1,50 @@
+@import "public/styles/styles";
+
+$nestingOffset: 16px;
+
+.titleContainer{
+  display:flex;
+  flex-direction: row;
+  padding-left: $nestingOffset;
+}
+
+.sectionTitle{
+  @include medium-text;
+  @include unselectable;
+  color: $secondaryTextColor;
+  padding-left: 16px;
+  font-size: 1rem;
+  margin: 0;
+  cursor: pointer;
+}
+
+.sectionTitle:hover{
+  color: $textColor;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.content {
+  padding-left: $nestingOffset;
+  padding-right: $nestingOffset;
+}
+
+.arrow{
+    cursor: pointer;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 3px;
+   z-index: 0;
+    width: 0.2rem;
+    height: 0.2rem;
+    margin-top: 0.1rem;
+    transform: rotate(45deg);
+    transform-origin: 75% 65%;
+  -webkit-transform: rotate(45deg);
+}

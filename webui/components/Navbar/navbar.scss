@@ -1,0 +1,64 @@
+@import "public/styles/styles";
+
+.title{
+  @include medium-text;
+  font-size: 1.5rem;
+  margin: 0 0 0 calc(16px + 1vw);
+}
+
+.icon{
+  position: relative;
+  display: inline-block;
+  color: $textColor;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-right: calc(4px + 2vw);
+}
+
+.icon .tooltipText {
+  @include regular-text;
+  font-size: 0.8rem;
+  visibility: hidden;
+  background-color: $background;
+  width: 60px;
+  color: $secondaryTextColor;
+  border-radius: 8px;
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  top: 100%;
+  left: 50%;
+  margin-left: -30px;
+  position: absolute;
+}
+
+.icon:hover{
+  color: $secondaryTextColor;
+}
+
+.icon:hover .tooltipText{
+  visibility: visible;
+}
+
+.navbar {
+  width: 100%;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbarContainer{
+  background-color: $background;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
