@@ -8,6 +8,7 @@ export function updateTrainingMaxes(old: ProgramBlueprint, ...trainingMaxes:[{ex
 }
 
 export default class ProgramBlueprint {
+    name: string;
     exercisePool: {[blueprintId: string]: ExerciseBlueprint};
     blocks: BlockBlueprint[];
 }

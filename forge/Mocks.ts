@@ -19,16 +19,17 @@ const trainingDaysPerWeek = 3;
 
 const block = new BlockBlueprint(totalWeeks,trainingDaysPerWeek);
 
-const makeProgression = (exerciseBlueprint: ExerciseBlueprint): Progression => {
+const makeProgression = (exerciseBlueprint: ExerciseBlueprint, day: number): Progression => {
     const setsMatrix: Matrix<ExerciseSet> = createMatrix();
 
     for (let i = 0; i < totalWeeks; i++){
+        const multiplier = ((day * 0.1) + 0.3) + (i * 0.1);
         setsMatrix.push([
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, 0.9),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, 0.9),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, 0.9),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, 0.9),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, 0.9)
+            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
+            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
+            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
+            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
+            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier)
         ])
     }
     return new FixedProgression(setsMatrix)
@@ -36,10 +37,10 @@ const makeProgression = (exerciseBlueprint: ExerciseBlueprint): Progression => {
 
 blueprints.forEach(blueprint => {
     for (let day = 0; day < trainingDaysPerWeek; day++) {
-        block.addExerciseForDay(blueprint, day, makeProgression(blueprint))
+        block.addExerciseForDay(blueprint, day, makeProgression(blueprint, day))
     }
 });
 
-const makeMockedProgramBlueprint = (): ProgramBlueprint => {return {blocks:[block],exercisePool:{}}};
+const makeMockedProgramBlueprint = (): ProgramBlueprint => {return {name:"Full body",blocks:[block],exercisePool:{}}};
 
 export { makeMockedProgramBlueprint };

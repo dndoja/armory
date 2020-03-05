@@ -1,6 +1,7 @@
 import ForgedExercise from "./ForgedExercise";
 
 type ForgedProgram = {
+    name: string
     blocks: ForgedBlock[]
 }
 

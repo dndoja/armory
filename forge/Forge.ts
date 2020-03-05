@@ -5,10 +5,10 @@ import BlockBlueprint from "./blueprints/BlockBlueprint";
 import {makeMockedProgramBlueprint} from "./Mocks";
 
 const forgeExercises = (blueprint: BlockBlueprint, day: number, week: number): ForgedExercise[] => {
-    const exerciseIds = blueprint.getExerciseIdsForDay(day);
-    return exerciseIds.map(id => {
-        const sets = blueprint.getSetsForExerciseInWeek(id, week);
-        return new ForgedExercise(id,"Exercise",sets)
+    const exercises = blueprint.getExercisesForDay(day);
+    return exercises.map(exercise => {
+        const sets = blueprint.getSetsForExerciseInWeek(exercise.id, week);
+        return new ForgedExercise(exercise.id,exercise.name,sets)
     });
 };
 
@@ -22,7 +22,7 @@ const forgeDays = (blueprint: BlockBlueprint, week: number): ForgedDay[] => {
 
 const forgeWeeks = (blueprint: BlockBlueprint): ForgedWeek[] => {
     const weeks: ForgedWeek[] = [];
-    for (let week = 0; week < blueprint.trainingDaysPerWeek; week++){
+    for (let week = 0; week < blueprint.totalWeeks; week++){
         weeks.push({days: forgeDays(blueprint,week)});
     }
     return weeks;
@@ -36,7 +36,7 @@ const forge = (programBlueprint?: ProgramBlueprint): ForgedProgram => {
     const blueprint = programBlueprint ? programBlueprint : makeMockedProgramBlueprint();
     const forgedBlocks = blueprint.blocks.map(blockBlueprint => forgeBlock(blockBlueprint));
     console.log(forgedBlocks);
-    return {blocks: forgedBlocks};
+    return {name: blueprint.name, blocks: forgedBlocks};
 };
 
 export { forge };

@@ -6,9 +6,10 @@ type SetBubbleProps = {
 }
 
 const SetBubble = (props: SetBubbleProps) => {
+    const formattedWeight = props.set.weight.toLocaleString('en-us', {maximumFractionDigits: 2});
     return (
         <div className={css.circlePrimary}>
-            <p className={css.innerText}>{props.set.reps}<br/>{props.set.weight}</p>
+            <p className={css.innerText}>{props.set.reps}<br/>{formattedWeight}</p>
         </div>
     )
 };

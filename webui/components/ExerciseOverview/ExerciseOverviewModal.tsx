@@ -1,4 +1,4 @@
-import ExerciseOverview from "../../models/ExerciseOverview";
+import ExerciseOverview from "@armory/forge/ExerciseOverview";
 import * as css from "./exercise_overview.scss";
 import SetBubble from "../SetBubble/SetBubble";
 import Modal from 'react-modal';
@@ -51,20 +51,6 @@ const ExerciseOverviewModal = (props: ExerciseOverviewModalProps) => {
                             </div>
                         </div>)
                     }
-                    {
-                    props.exerciseSummary.sets.map(value => <div className={css.row}>
-                    <p className={css.label}>{value[0]}</p>
-                    <div style={{flex:1}}>
-                    <div className={css.bubbles}>
-                    {
-                        value[1].map(set => <SetBubble set={set}/>)
-                    }
-                    </div>
-                    </div>
-
-                    </div>
-                    )
-                }
                     </Scrollbar>
                 </div>
             </div>

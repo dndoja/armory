@@ -12,7 +12,7 @@ export default class BlockBlueprint {
     readonly totalWeeks: number;
     readonly trainingDaysPerWeek: number;
     private readonly blueprintIdToExerciseIdMap: Matrix<string>;
-    private readonly daysToExerciseIdsMatrix: Matrix<string>;
+    private readonly daysToExerciseIdsMatrix: Matrix<Exercise>;
     private readonly exercisesMap: IdMap<Exercise>;
     private readonly exercisesToProgressionMatrix: IdMap<Progression>;
 
@@ -32,7 +32,7 @@ export default class BlockBlueprint {
     addExerciseForDay(blueprint: ExerciseBlueprint, day: number, progression: Progression) {
         const exerciseId = uuid();
         this.exercisesMap[exerciseId] = blueprint;
-        this.daysToExerciseIdsMatrix[day].push(exerciseId);
+        this.daysToExerciseIdsMatrix[day].push({id: exerciseId, name: blueprint.name});
         this.blueprintIdToExerciseIdMap[blueprint.id] = exerciseId;
         this.exercisesToProgressionMatrix[exerciseId] = progression;
     }
@@ -49,7 +49,7 @@ export default class BlockBlueprint {
         }
     }
 
-    getExerciseIdsForDay(day: number): string[]{
+    getExercisesForDay(day: number): Exercise[]{
         return this.daysToExerciseIdsMatrix[day]
     }
 

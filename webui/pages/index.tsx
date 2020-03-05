@@ -4,7 +4,6 @@ import ExerciseOverviewModal from "../components/ExerciseOverview/ExerciseOvervi
 import NavbarIcon from "../components/Navbar/NavbarIcon";
 import Navbar from "../components/Navbar/Navbar";
 import ProgramOverview from "../screens/ProgramOverview/ProgramOverview";
-import Drawer from "../components/Drawer/Drawer";
 import TrainingMaxesDrawer from "../components/TrainingMaxesDrawer/TrainingMaxesDrawer";
 import "../public/styles/input.scss"
 import ExerciseVisibilityDrawer from "../components/ExerciseVisibilityDrawer/ExerciseVisibilityDrawer";
@@ -41,7 +40,7 @@ const Home = () => {
                 exerciseVisibilityMap: exerciseVisibilityMap
             }}>
 
-            <Navbar title={"Cool ass program"}>
+            <Navbar title={program.name}>
                 <NavbarIcon iconName="fa-eye" onClick={() => setIsVisibilityDrawerOpen(true)} label={"Exercise visibility"}/>
                 <NavbarIcon iconName="fa-dumbbell" onClick={() => setIsDrawerOpen(true)} label={"Training maxes"}/>
             </Navbar>
