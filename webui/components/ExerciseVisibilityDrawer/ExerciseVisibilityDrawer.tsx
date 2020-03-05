@@ -3,7 +3,7 @@ import Drawer, {DrawerType} from "../Drawer/Drawer";
 import ModalProps from "../../models/ModalProps";
 import VisibilityToggle from "./VisibilityToggle/VisibilityToggle";
 import ProgramOverviewContext from "../../screens/ProgramOverview/ProgramOverviewContext";
-import CollapsableSection from "../CollapsableSection/CollapsableSection";
+import Section from "../Section/Section";
 import * as css from "./exercise_visibility_drawer.scss"
 import {ForgedProgram} from "@armory/forge/forged/ForgedProgram";
 
@@ -15,17 +15,16 @@ class TrainingMaxesDrawerProps implements ModalProps{
 
 const ExerciseVisibilityDrawer: FunctionComponent<TrainingMaxesDrawerProps> = (props) => {
     const context = useContext(ProgramOverviewContext);
-
     const visibilityMap = context.exerciseVisibilityMap;
+    const blocks = props.program.blocks;
 
     return (
         <Drawer {...props} title={"Exercise visibility"} subtitle={"Hide/show exercises"} type={DrawerType.HORIZONTAL}>
             <div style={{width:'100%'}}>
-
                 {
-                    props.program.blocks.map((block,blockIndex) => {
+                    blocks.map((block,blockIndex) => {
                         return (
-                            <CollapsableSection title={'Block ' + (blockIndex + 1)}>
+                            <Section title={blocks.length > 1 ? 'Block ' + (blockIndex + 1) : undefined}>
                                 <div className={css.content}>
                                 {
                                     block.weeks[0].days.map((workout, index) => {
@@ -45,7 +44,7 @@ const ExerciseVisibilityDrawer: FunctionComponent<TrainingMaxesDrawerProps> = (p
                                     })
                                 }
                                 </div>
-                            </CollapsableSection>
+                            </Section>
                         )
                     })
                 }

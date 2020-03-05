@@ -10,15 +10,19 @@ $nestingOffset: 16px;
 
 .sectionTitle{
   @include medium-text;
-  @include unselectable;
   color: $secondaryTextColor;
   padding-left: 16px;
   font-size: 1rem;
   margin: 0;
+
+}
+.sectionTitleClickable{
+  @extend .sectionTitle;
+  @include unselectable;
   cursor: pointer;
 }
 
-.sectionTitle:hover{
+.sectionTitleClickable:hover{
   color: $textColor;
 }
 

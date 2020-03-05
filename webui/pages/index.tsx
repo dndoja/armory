@@ -51,9 +51,7 @@ const Home = () => {
                 exerciseSummary={getExerciseOverview(program,modalState.exerciseId)}
                 onRequestClose={() => setModalState({...modalState,isOpen: false})}
             />
-            <div style={isVisibilityDrawerOpen ? {overflow:'hidden', height:'90vh'} : {}}>
-                <ProgramOverview {...program}/>
-            </div>
+            <ProgramOverview {...program}/>
         </ProgramOverviewContextProvider>
     )
 };

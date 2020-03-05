@@ -8,9 +8,12 @@ import ExerciseSet from "./workout_sets/ExerciseSet";
 import Matrix, {createMatrix} from "./common/Matrix";
 
 const blueprints = [
+    new ExerciseBlueprint("Front squats", 100),
+    new ExerciseBlueprint("Push press", 80),
+    new ExerciseBlueprint("Curls", 40),
+    new ExerciseBlueprint("Overhead press", 60),
     new ExerciseBlueprint("Bench press",100),
     new ExerciseBlueprint("Squats",140),
-    new ExerciseBlueprint("Overhead press", 60),
     new ExerciseBlueprint("Deadlift", 180)
 ];
 
