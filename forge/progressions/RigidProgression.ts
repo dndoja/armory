@@ -1,5 +1,6 @@
 import Progression from "./Progression";
 import ExerciseSet from "../workout_sets/ExerciseSet";
+import {List} from "immutable";
 
 export default class RigidProgression implements Progression{
     private readonly sets: ExerciseSet[];
@@ -10,5 +11,9 @@ export default class RigidProgression implements Progression{
 
     getAllSets = (): ExerciseSet[] => this.sets;
 
-    getSetsAtWeek = this.getAllSets
+    getSetsAtWeek = (week: number): List<ExerciseSet> => List(this.getAllSets());
+
+    updateSets(transformation: (set: ExerciseSet) => {}): Progression {
+        return new RigidProgression(...this.sets);
+    }
 }

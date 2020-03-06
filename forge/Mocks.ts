@@ -23,18 +23,12 @@ const trainingDaysPerWeek = 3;
 const block = new BlockBlueprint(totalWeeks,trainingDaysPerWeek);
 
 const makeProgression = (exerciseBlueprint: ExerciseBlueprint, day: number): Progression => {
-    const setsMatrix: Matrix<ExerciseSet> = createMatrix();
-
-    for (let i = 0; i < totalWeeks; i++){
-        const multiplier = ((day * 0.1) + 0.3) + (i * 0.1);
-        setsMatrix.push([
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier),
-            new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier)
-        ])
-    }
+    const allSets: Array<ExerciseSet> = Array.of(totalWeeks).map((_, index) => {
+            const multiplier = ((day * 0.1) + 0.3) + (index * 0.1);
+            return new TMaxVaryingSet(8, exerciseBlueprint.trainingMax, multiplier)
+        }
+    );
+    const setsMatrix: Matrix<ExerciseSet> = createMatrix(allSets);
     return new FixedProgression(setsMatrix)
 };
 

@@ -1,17 +1,18 @@
-export function createMatrix<T>(size?: number): Matrix<T> {
-    if (!size){
-        return new Matrix<T>()
-    }
+import {List} from "immutable";
 
-    const matrix = new Matrix<T>(size);
-    for (let i = 0; i < matrix.length; i++){
-        matrix[i] = []
-    }
-    return matrix
+export const createMatrix = <T>(...values: T[][]): Matrix<T> => List<List<T>>(values.map(arr => List(arr)));
+
+export const flatten = <T>(matrix: Matrix<T>): Array<T> => [].concat(...matrix);
+
+export function pushToRow<T>(matrix: Matrix<T>, value: T, rowIndex: number): Matrix<T>{
+    const mutatedMatrix = matrix.get(rowIndex) ? matrix : matrix.set(rowIndex, List());
+    const mutatedRow = mutatedMatrix.get(rowIndex).push(value);
+    return mutatedMatrix.set(rowIndex,mutatedRow)
 }
 
-export function flatten<T>(matrix: Matrix<T>): Array<T> {
-    return [].concat(...matrix);
-}
 
-export default class Matrix<T> extends Array<Array<T>>{}
+
+type Matrix<T> = List<List<T>>
+
+export default Matrix
+//export default class Matrix<T> extends Array<Array<T>>{}
