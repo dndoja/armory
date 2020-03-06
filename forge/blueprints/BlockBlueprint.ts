@@ -25,10 +25,6 @@ export default class BlockBlueprint {
         this.exercisesToProgressionMatrix = {};
     }
 
-    public log(){
-        console.log(this.exercisesToProgressionMatrix)
-    }
-
     addExerciseForDay(blueprint: ExerciseBlueprint, day: number, progression: Progression) {
         const exerciseId = uuid();
         this.exercisesMap[exerciseId] = blueprint;
@@ -40,18 +36,14 @@ export default class BlockBlueprint {
     updateTrainingMaxForBlueprint(blueprintId: string, newTrainingMax: number){
         const exerciseId = this.blueprintIdToExerciseIdMap[blueprintId];
         const progression = this.exercisesToProgressionMatrix[exerciseId];
-        if (progression instanceof FixedProgression){
-            progression.getAllSets().forEach(set => {
-                if (set instanceof TMaxVaryingSet){
-                    set.trainingMax = newTrainingMax
-                }
-            })
-        }
+        progression.getAllSets().forEach(set => {
+            if (set instanceof TMaxVaryingSet){
+                set.trainingMax = newTrainingMax
+            }
+        })
     }
 
-    getExercisesForDay(day: number): Exercise[]{
-        return this.daysToExerciseIdsMatrix[day]
-    }
+    getExercisesForDay = (day: number): Exercise[] => this.daysToExerciseIdsMatrix[day];
 
     getSetsForExerciseInWeek(exerciseId: string, week: number): ExerciseSet[]{
         return this.exercisesToProgressionMatrix[exerciseId].getSetsAtWeek(week)

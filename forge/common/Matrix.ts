@@ -10,4 +10,8 @@ export function createMatrix<T>(size?: number): Matrix<T> {
     return matrix
 }
 
+export function flatten<T>(matrix: Matrix<T>): Array<T> {
+    return [].concat(...matrix);
+}
+
 export default class Matrix<T> extends Array<Array<T>>{}

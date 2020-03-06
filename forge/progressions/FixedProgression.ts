@@ -1,24 +1,16 @@
 import TMaxVaryingSet from "../workout_sets/TMaxVaryingSet";
 import Progression from "./Progression";
 import ExerciseSet from "../workout_sets/ExerciseSet";
+import Matrix, {flatten} from "../common/Matrix";
 
 export class FixedProgression implements Progression{
-    private readonly setsMatrix: ExerciseSet[][];
+    private readonly setsMatrix: Matrix<ExerciseSet>;
 
-    private _flattenedMatrix: ExerciseSet[];
-
-    constructor(setsMatrix: ExerciseSet[][]) {
+    constructor(setsMatrix: Matrix<ExerciseSet>) {
         this.setsMatrix = setsMatrix;
     }
 
-    getSetsAtWeek(week: number): ExerciseSet[] {
-        return this.setsMatrix[week];
-    }
+    getSetsAtWeek = (week: number): ExerciseSet[] => this.setsMatrix[week];
 
-    getAllSets(): ExerciseSet[]{
-        if (this._flattenedMatrix == undefined){
-            this._flattenedMatrix = [].concat(...this.setsMatrix);
-        }
-        return this._flattenedMatrix;
-    }
+    getAllSets = (): ExerciseSet[] => flatten(this.setsMatrix);
 }

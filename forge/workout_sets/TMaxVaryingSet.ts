@@ -1,9 +1,5 @@
 import ExerciseSet from "./ExerciseSet";
 
-export function recalculate(old: TMaxVaryingSet, newTrainingMax: number): TMaxVaryingSet {
-    return new TMaxVaryingSet(old.reps,old.trainingMax,newTrainingMax)
-}
-
 export default class TMaxVaryingSet implements ExerciseSet{
     reps: number;
     trainingMax: number;
