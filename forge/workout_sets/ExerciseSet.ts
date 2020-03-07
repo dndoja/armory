@@ -1,4 +1,4 @@
 export default interface ExerciseSet {
-    reps: number,
-    weight: number,
+    readonly reps: number,
+    readonly weight: number,
 }

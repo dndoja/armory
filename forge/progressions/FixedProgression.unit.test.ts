@@ -3,8 +3,8 @@ import Matrix, {createMatrix, flatten} from "../common/Matrix";
 import {FixedProgression} from "./FixedProgression";
 
 const mockSetsMatrix = (weeks: number) => {
-    const allSets = Array(weeks).map((_,i) => {return{reps: 1 + 1, weight: 100 + i}});
-    return createMatrix(allSets);
+    const allSets = Array(weeks).fill(0).map((_,i) => {return[{reps: 1 + 1, weight: 100 + i}]});
+    return createMatrix<ExerciseSet>(...allSets);
 };
 
 describe('Fixed progression', () => {
@@ -22,6 +22,6 @@ describe('Fixed progression', () => {
         const mockedSetsMatrix = mockSetsMatrix(weeks);
         const progression = new FixedProgression(mockedSetsMatrix);
         const setsAtWeek = progression.getSetsAtWeek(targetWeek);
-        expect(mockedSetsMatrix[targetWeek]).toEqual(setsAtWeek)
+        expect(mockedSetsMatrix.get(targetWeek)).toEqual(setsAtWeek)
     });
 });

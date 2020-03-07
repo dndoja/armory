@@ -17,6 +17,6 @@ describe('TMaxVaryingSet', () => {
    it('should give the multiplier as a percentage correctly', () => {
        const multiplier = 0.8;
        const set = new TMaxVaryingSet(6,100,multiplier);
-       expect(set.getMultiplierAsPercentage()).toBe('80%');
+       expect(set.multiplierAsPercentage).toBe('80%');
    })
 });

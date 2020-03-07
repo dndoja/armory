@@ -11,9 +11,9 @@ export class FixedProgression implements Progression{
         this.setsMatrix = setsMatrix;
     }
 
-    getSetsAtWeek = (week: number): List<ExerciseSet> => this.setsMatrix.get(week);
+    getSetsAtWeek = (week: number): List<ExerciseSet> => this.setsMatrix.get(week) ?? List();
 
-    getAllSets = (): ExerciseSet[] => flatten(this.setsMatrix);
+    getAllSets = (): List<ExerciseSet> => flatten(this.setsMatrix);
 
     updateSets(transformation: (set: ExerciseSet) => ExerciseSet): Progression {
         return new FixedProgression(this.setsMatrix.map(row => row.map(set => transformation(set))))

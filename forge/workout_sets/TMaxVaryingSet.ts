@@ -1,21 +1,17 @@
 import ExerciseSet from "./ExerciseSet";
 
 export default class TMaxVaryingSet implements ExerciseSet{
-    reps: number;
-    trainingMax: number;
-    multiplier: number;
+    readonly reps: number;
+    readonly trainingMax: number;
+    readonly multiplier: number;
+    readonly weight: number;
+    readonly multiplierAsPercentage: string;
 
     constructor(reps: number, trainingMax: number, multiplier: number = 1) {
         this.reps = reps;
         this.trainingMax = trainingMax;
         this.multiplier = multiplier;
-    }
-
-    get weight(): number {
-        return this.trainingMax * this.multiplier;
-    }
-
-    public getMultiplierAsPercentage(): string {
-        return (this.multiplier * 100).toString() + "%"
+        this.weight = this.trainingMax * this.multiplier;
+        this.multiplierAsPercentage = (this.multiplier * 100).toString() + "%";
     }
 }
