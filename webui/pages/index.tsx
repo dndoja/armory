@@ -8,8 +8,8 @@ import TrainingMaxesDrawer from "../components/TrainingMaxesDrawer/TrainingMaxes
 import "../public/styles/input.scss"
 import ExerciseVisibilityDrawer from "../components/ExerciseVisibilityDrawer/ExerciseVisibilityDrawer";
 import ExerciseVisibilityMap, {fromProgram} from "../models/ExerciseVisibilityMap";
-import {forge} from "@armory/forge/Forge";
-import {getExerciseOverview} from "@armory/forge/forged/Utilities";
+import {forge} from "@armory/forge/src/Forge";
+import {getExerciseOverview} from "@armory/forge/src/forged/Utilities";
 
 const program = forge();
 const toggledMap: ExerciseVisibilityMap = fromProgram(program);

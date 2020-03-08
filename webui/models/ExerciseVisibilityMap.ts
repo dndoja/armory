@@ -1,4 +1,4 @@
-import {ForgedProgram} from "@armory/forge/forged/ForgedProgram";
+import {ForgedProgram} from "@armory/forge/src/forged/ForgedProgram";
 
 interface ExerciseVisibilityMap {
     [key:string]: {visible: boolean, name: string}

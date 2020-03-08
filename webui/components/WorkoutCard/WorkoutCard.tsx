@@ -1,6 +1,6 @@
 import * as css from "./workout_card.scss"
 import WorkoutCardRow from "./WorkoutCardRow";
-import {ForgedDay} from "@armory/forge/forged/ForgedProgram";
+import {ForgedDay} from "@armory/forge/src/forged/ForgedProgram";
 
 type WorkoutCardProps = {
     workout: ForgedDay,

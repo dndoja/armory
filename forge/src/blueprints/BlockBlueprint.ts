@@ -50,17 +50,14 @@ export default class BlockBlueprint {
         return new BlockBlueprint(this.totalWeeks, this.trainingDaysPerWeek, newExercisesMap, this.blueprintToExerciseIdsMap, this.daysToExerciseIdsMatrix)
     };
 
+    getExerciseById = (id: string): ExerciseWithProgression | undefined => this.exercisesMap.get(id);
+
     getExercisesForDay = (day: number): List<ExerciseWithProgression> => this.getExercisesByIds(this.getExerciseIdsForDay(day));
 
     getExercisesForBlueprint = (blueprint: ExerciseBlueprint): List<ExerciseWithProgression> => this.getExercisesByIds(this.getExerciseIdsForBlueprint(blueprint));
 
     updateExercisesForBlueprint = (blueprint: ExerciseBlueprint, transformation: (exercise: ExerciseWithProgression) => ExerciseWithProgression): BlockBlueprint => {
         const exercisesToBeModified = this.getExerciseIdsForBlueprint(blueprint);
-        return this.updateExercisesByIds(exercisesToBeModified, transformation)
-    };
-
-    updateExercisesForDay = (day: number, transformation: (exercise: ExerciseWithProgression) => ExerciseWithProgression): BlockBlueprint => {
-        const exercisesToBeModified = this.getExerciseIdsForDay(day);
         return this.updateExercisesByIds(exercisesToBeModified, transformation)
     };
 };

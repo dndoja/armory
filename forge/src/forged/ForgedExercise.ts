@@ -1,16 +1,15 @@
-import ForgedSet from "./ForgedSet";
-import Exercise from "../Exercise";
+import Exercise from "../common/Exercise";
 import ExerciseSet from "../workout_sets/ExerciseSet";
 import BodyPart from "../common/BodyPart";
+import {List} from "immutable";
 
 class ForgedExercise implements Exercise{
     readonly id: string;
     readonly name: string;
-    readonly sets: ExerciseSet[];
+    readonly sets: List<ExerciseSet>;
     readonly targetedBodyParts: BodyPart[];
 
-
-    constructor(id: string, name: string, sets: ExerciseSet[], targetedBodyParts: BodyPart[] = []) {
+    constructor(id: string, name: string, sets: List<ExerciseSet>, targetedBodyParts: BodyPart[] = []) {
         this.id = id;
         this.name = name;
         this.sets = sets;

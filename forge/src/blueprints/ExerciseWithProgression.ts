@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import BodyPart from "../common/BodyPart";
-import Exercise from "../Exercise";
+import Exercise from "../common/Exercise";
 import Progression from "../progressions/Progression";
 import ExerciseBlueprint from "./ExerciseBlueprint";
 

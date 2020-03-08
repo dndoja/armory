@@ -5,7 +5,7 @@ import VisibilityToggle from "./VisibilityToggle/VisibilityToggle";
 import ProgramOverviewContext from "../../screens/ProgramOverview/ProgramOverviewContext";
 import Section from "../Section/Section";
 import * as css from "./exercise_visibility_drawer.scss"
-import {ForgedProgram} from "@armory/forge/forged/ForgedProgram";
+import {ForgedProgram} from "@armory/forge/src/forged/ForgedProgram";
 
 class TrainingMaxesDrawerProps implements ModalProps{
     isOpen: boolean;

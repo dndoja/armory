@@ -1,6 +1,6 @@
 class ForgedSet {
-    reps: string;
-    weight: string;
+    readonly reps: string;
+    readonly weight: string;
 
     constructor(reps: string, weight: string) {
         this.reps = reps;

@@ -1,5 +1,5 @@
 import * as css from './set_bubble.scss'
-import ExerciseSet from "@armory/forge/workout_sets/ExerciseSet";
+import ExerciseSet from "@armory/forge/src/workout_sets/ExerciseSet";
 
 type SetBubbleProps = {
     set: ExerciseSet,

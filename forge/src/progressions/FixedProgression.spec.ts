@@ -1,9 +1,10 @@
 import ExerciseSet from "../workout_sets/ExerciseSet";
 import Matrix, {createMatrix, flatten} from "../common/Matrix";
 import {FixedProgression} from "./FixedProgression";
+import {mapNTimes} from "../forged/Utilities";
 
 const mockSetsMatrix = (weeks: number) => {
-    const allSets = Array(weeks).fill(0).map((_,i) => {return[{reps: 1 + 1, weight: 100 + i}]});
+    const allSets = mapNTimes(weeks,week => {return[{reps: 1 + week, weight: 100 + week}]});
     return createMatrix<ExerciseSet>(...allSets);
 };
 

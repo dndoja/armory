@@ -11,10 +11,7 @@ export default class RigidProgression implements Progression{
 
     getAllSets = (): List<ExerciseSet> => this.sets;
 
-    getSetsAtWeek = (): List<ExerciseSet> => List(this.getAllSets());
+    getSetsAtWeek = (week: number): List<ExerciseSet> => List(this.getAllSets());
 
-    updateSets(transformation: (set: ExerciseSet) => {}): Progression {
-        //todo apply the transformation to all of the sets
-        return new RigidProgression(...this.sets);
-    }
+    updateSets = (transformation: (set: ExerciseSet) => ExerciseSet): Progression => new RigidProgression(...this.sets.map(set => transformation(set)));
 }

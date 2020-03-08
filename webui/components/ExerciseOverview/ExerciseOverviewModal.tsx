@@ -1,4 +1,4 @@
-import ExerciseOverview from "@armory/forge/ExerciseOverview";
+import ExerciseOverview from "@armory/forge/src/ExerciseOverview";
 import * as css from "./exercise_overview.scss";
 import SetBubble from "../SetBubble/SetBubble";
 import Modal from 'react-modal';

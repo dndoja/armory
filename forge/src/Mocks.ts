@@ -20,7 +20,7 @@ const blueprints = [
 const totalWeeks = 6;
 const trainingDaysPerWeek = 3;
 
-const block = new BlockBlueprint(totalWeeks,trainingDaysPerWeek);
+const block = BlockBlueprint.make(totalWeeks,trainingDaysPerWeek);
 
 const makeProgression = (exerciseBlueprint: ExerciseBlueprint, day: number): Progression => {
     const allSets: Array<ExerciseSet> = Array.of(totalWeeks).map((_, index) => {

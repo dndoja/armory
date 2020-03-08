@@ -1,7 +1,7 @@
 import TMaxVaryingSet from "./TMaxVaryingSet";
 
 describe('TMaxVaryingSet', () => {
-   it('should calculate the weight correctly', () => {
+   it('should calculate the weight as the multiple of the trainingMax and multiplier', () => {
        const trainingMax = 100;
        const multiplier = 0.8;
        const set = new TMaxVaryingSet(5, trainingMax, multiplier);

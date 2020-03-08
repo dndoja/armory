@@ -12,7 +12,9 @@ const mockedProgression = (trainingMax: number): Progression => new FixedProgres
         [new TMaxVaryingSet(5, trainingMax), {reps: 5,weight: 150}],
         [new TMaxVaryingSet(5, trainingMax), {reps: 5,weight: 150}],
         [new TMaxVaryingSet(5, trainingMax), {reps: 5,weight: 150}],
-        [new TMaxVaryingSet(5, trainingMax), {reps: 5,weight: 150}]));
+        [new TMaxVaryingSet(5, trainingMax), {reps: 5,weight: 150}]
+    )
+);
 
 describe('BlockBlueprint', () => {
     const exerciseName = 'squat';
@@ -21,7 +23,7 @@ describe('BlockBlueprint', () => {
     const progression = mockedProgression(trainingMax);
     const exerciseBlueprint = new ExerciseBlueprint(exerciseName,trainingMax);
 
-    const blueprint = new BlockBlueprint(8,3)
+    const blueprint = BlockBlueprint.make(8,3)
         .withExercise(new ExerciseWithProgression(exerciseBlueprint,progression),day);
 
     const exercisesAtDay = blueprint.getExercisesForDay(day);

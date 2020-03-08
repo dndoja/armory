@@ -1,7 +1,7 @@
 import Section from "../../components/Section/Section";
 import WorkoutCard from "../../components/WorkoutCard/WorkoutCard";
 import Divider from "../../components/Divider/Divider";
-import {ForgedProgram} from "@armory/forge/forged/ForgedProgram";
+import {ForgedProgram} from "@armory/forge/src/forged/ForgedProgram";
 
 const ProgramOverview = (props: ForgedProgram) => <div>
     {
