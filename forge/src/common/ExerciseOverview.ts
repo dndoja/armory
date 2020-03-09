@@ -14,7 +14,7 @@ class ExerciseOverview{
     readonly name: string;
     readonly sets: List<ExerciseOverviewItem>;
 
-    constructor(id: string,name: string, sets: List<ExerciseOverviewItem>) {
+    constructor(id: string, name: string, sets: List<ExerciseOverviewItem>) {
         this.name = name;
         this.sets = sets;
         this.id = id;

@@ -20,26 +20,26 @@ export default class ProgramBlueprint {
 
     structured = (): ForgedProgram => forgeProgram(this);
 
-    getExerciseOverview = (exerciseId: string): ExerciseOverview => {
+    getExerciseOverview = (exerciseId: string): ExerciseOverview | undefined => {
         const overviewItemsInProgram: Array<ExerciseOverviewItem> = [];
+        let name;
 
         this.blocks.forEach((block, blockIndex) => {
             const exercise = block.getExerciseById(exerciseId);
             if (exercise) {
+                name = exercise.name;
                 const overviewItemsInBlock = mapNTimes(block.totalWeeks, week => {
-                    return {block: blockIndex,week: week,sets: exercise.progression.getSetsAtWeek(week)}
+                    return {block: blockIndex, week: week, sets: exercise.progression.getSetsAtWeek(week)}
                 });
                 overviewItemsInProgram.push(...overviewItemsInBlock)
             }
         });
 
-        return new ExerciseOverview(exerciseId, 'Bench press', List(overviewItemsInProgram))
+        return name ? new ExerciseOverview(exerciseId, name, List(overviewItemsInProgram)) : undefined
     };
 
     updateExerciseTrainingMax = (exerciseBlueprint: ExerciseBlueprint, newTrainingMax: number): ProgramBlueprint => {
-        return {
-            ...this,
-            blocks: this.blocks.map(block => block.updateExercisesForBlueprint(exerciseBlueprint, exercise => updateTrainingMax(exercise, newTrainingMax)))
-        }
+        const newBlocks = this.blocks.map(block => block.updateExercisesForBlueprint(exerciseBlueprint, exercise => updateTrainingMax(exercise, newTrainingMax)));
+        return new ProgramBlueprint(this.name, ...newBlocks);
     }
 }

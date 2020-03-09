@@ -3,10 +3,10 @@ import BodyPart from "../common/BodyPart";
 import Exercise from "../common/Exercise";
 
 export default class ExerciseBlueprint implements Exercise{
-    public readonly id: string;
-    public readonly name: string;
-    public readonly trainingMax: number;
-    public readonly targetedBodyParts: BodyPart[];
+    readonly id: string;
+    readonly name: string;
+    readonly trainingMax: number;
+    readonly targetedBodyParts: BodyPart[];
 
     constructor(name: string,trainingMax: number, targetedBodyParts: BodyPart[] = [], id: string = uuid()) {
         this.id = id;

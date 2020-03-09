@@ -1,6 +1,5 @@
 import ProgramBlueprint from "../blueprints/ProgramBlueprint";
 import {ForgedBlock, ForgedDay, ForgedProgram, ForgedWeek} from "./ForgedProgram";
-import {makeMockedProgramBlueprint} from "../Mocks";
 import BlockBlueprint from "../blueprints/BlockBlueprint";
 import {List} from "immutable";
 import ForgedExercise from "./ForgedExercise";
@@ -29,9 +28,6 @@ const forgeBlock = (blueprint: BlockBlueprint): ForgedBlock => {
     return {weeks: forgeWeeks(blueprint)}
 };
 
-const forgeProgram = (programBlueprint?: ProgramBlueprint): ForgedProgram => {
-    const blueprint = programBlueprint ? programBlueprint : makeMockedProgramBlueprint();
-    return blueprint.structured()
-};
+const forgeProgram = (programBlueprint: ProgramBlueprint): ForgedProgram => programBlueprint.structured();
 
 export { forgeProgram };
