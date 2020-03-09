@@ -9,20 +9,25 @@ const mockSetsMatrix = (weeks: number) => {
 };
 
 describe('Fixed progression', () => {
+    const weeks = 8;
+    const mockedSetsMatrix = mockSetsMatrix(weeks);
+    const progression = new FixedProgression(mockedSetsMatrix);
+
     describe('getAllSets', () => {
-        it('should contain all the sets', () => {
-            const mockedSetsMatrix = mockSetsMatrix(8);
-            const progression = new FixedProgression(mockedSetsMatrix);
+        it('should return all of the sets', () => {
             expect(progression.getAllSets()).toEqual(flatten(mockedSetsMatrix));
         });
     });
 
-    it('should get the correct sets at the given week', () => {
-        const weeks = 8;
+    it('should return the correct sets for the given week', () => {
         const targetWeek = weeks - 1;
-        const mockedSetsMatrix = mockSetsMatrix(weeks);
-        const progression = new FixedProgression(mockedSetsMatrix);
         const setsAtWeek = progression.getSetsAtWeek(targetWeek);
         expect(mockedSetsMatrix.get(targetWeek)).toEqual(setsAtWeek)
     });
+
+    it('should update all of the sets correctly', () => {
+        const newWeight = 111;
+        const updated = progression.updateSets(set => {return {...set, weight: newWeight}});
+        updated.getAllSets().forEach(set => expect(set.weight).toBe(newWeight))
+    })
 });

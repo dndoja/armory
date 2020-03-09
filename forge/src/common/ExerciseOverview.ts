@@ -2,7 +2,8 @@ import ExerciseSet from "@armory/forge/src/workout_sets/ExerciseSet";
 import {List} from "immutable";
 
 type ExerciseOverviewItem = {
-    identifier: string,
+    week: number,
+    block: number,
     sets: List<ExerciseSet>
 }
 

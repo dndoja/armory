@@ -61,14 +61,3 @@ export default class BlockBlueprint {
         return this.updateExercisesByIds(exercisesToBeModified, transformation)
     };
 };
-
-export const updateTrainingMax = (block: BlockBlueprint, exercise: ExerciseBlueprint, newTrainingMax: number): BlockBlueprint => block.updateExercisesForBlueprint(exercise, exercise => {
-    const newProgression = exercise.progression.updateSets(set => {
-        if (set instanceof TMaxVaryingSet) {
-            return new TMaxVaryingSet(set.reps, newTrainingMax, set.multiplier)
-        } else {
-            return set
-        }
-    });
-    return new ExerciseWithProgression(exercise.blueprint, newProgression, exercise.id)
-});
