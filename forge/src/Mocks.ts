@@ -11,7 +11,7 @@ export const mockExercise = (name: string, trainingMax: number, weeksPerformedFo
     id
 );
 
-const mockFixedProgression = (weeks: number, trainingMax: number): FixedProgression => new FixedProgression(
+export const mockFixedProgression = (weeks: number, trainingMax: number): FixedProgression => new FixedProgression(
     createMatrix(...mapNTimes(weeks,() => [
         new TMaxVaryingSet(8,trainingMax),
         {reps:8, weight: 80}

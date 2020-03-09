@@ -13,7 +13,7 @@ const mockBlock = (): BlockBlueprint => BlockBlueprint.make(weeksPerBlock,3)
 
 describe('ProgramBlueprint', () => {
     const blocks = [mockBlock(),mockBlock()];
-    const blueprint = new ProgramBlueprint('asd', mockBlock());
+    const blueprint = new ProgramBlueprint('asd', ...blocks);
 
     describe("getExerciseOverview", () => {
         const overview = blueprint.getExerciseOverview(primaryExercise.id)!;

@@ -2,6 +2,7 @@ import ExerciseBlueprint from "./ExerciseBlueprint";
 import {List, Map, Set} from "immutable";
 import ExerciseWithProgression from "./ExerciseWithProgression";
 import TMaxVaryingSet from "../workout_sets/TMaxVaryingSet";
+import Progression from "../progressions/Progression";
 
 export default class BlockBlueprint {
     readonly totalWeeks: number;
@@ -24,7 +25,10 @@ export default class BlockBlueprint {
         this.daysToExerciseIdsMatrix = daysToExercisesMatrix;
     }
 
-    static make = (totalWeeks: number, trainingDaysPerWeek: number): BlockBlueprint => new BlockBlueprint(totalWeeks,trainingDaysPerWeek);
+    static make = (totalWeeks: number, trainingDaysPerWeek: number, ...exercises:{blueprint: ExerciseBlueprint, progression: Progression}[]): BlockBlueprint => {
+        //todo do something with the exercises
+        return new BlockBlueprint(totalWeeks,trainingDaysPerWeek);
+    };
 
     withExercise = (exerciseWithProgression: ExerciseWithProgression, day: number): BlockBlueprint => {
         const exerciseId = exerciseWithProgression.id;
