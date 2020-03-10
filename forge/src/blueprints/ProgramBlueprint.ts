@@ -1,5 +1,5 @@
 import BlockBlueprint from "./BlockBlueprint";
-import {List} from "immutable";
+import {List, Set} from "immutable";
 import {ProgramTimeline} from "../timeline/ProgramTimeline";
 import ExerciseOverview, {ExerciseOverviewItem} from "../common/ExerciseOverview";
 import {mapNTimes} from "../common/Utilities";
@@ -41,5 +41,7 @@ export default class ProgramBlueprint {
     updateExerciseTrainingMax = (exerciseBlueprint: ExerciseBlueprint, newTrainingMax: number): ProgramBlueprint => {
         const newBlocks = this.blocks.map(block => block.updateExercisesForBlueprint(exerciseBlueprint, exercise => updateTrainingMax(exercise, newTrainingMax)));
         return new ProgramBlueprint(this.name, ...newBlocks);
-    }
+    };
+
+    getExerciseBlueprints = (): Set<ExerciseBlueprint> => Set.of(...this.blocks.flatMap(block => block.getExerciseBlueprints()))
 }

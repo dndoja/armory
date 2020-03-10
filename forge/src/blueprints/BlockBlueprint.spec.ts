@@ -21,6 +21,13 @@ describe('BlockBlueprint', () => {
         }
     });
 
+    it('should return all of the exercise blueprints', () => {
+        const blueprints = blockBlueprint.getExerciseBlueprints();
+        expect(blueprints.size).toBe(2);
+        expect(blueprints).toContain(mainExercise.blueprint);
+        expect(blueprints).toContain(dummyExercise.blueprint)
+    });
+
     it('should add an exercise and its\' sets correctly in a given day',() => {
         expect(exercisesAtDay1.get(0)).toEqual(mainExercise);
         expect(exercisesAtDay2.get(0)).toEqual(dummyExercise);

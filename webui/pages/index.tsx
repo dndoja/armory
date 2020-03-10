@@ -1,5 +1,5 @@
 import {ProgramOverviewContextProvider} from "../screens/ProgramOverview/ProgramOverviewContext";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ExerciseOverviewModal from "../components/ExerciseOverview/ExerciseOverviewModal";
 import NavbarIcon from "../components/Navbar/NavbarIcon";
 import Navbar from "../components/Navbar/Navbar";
@@ -9,6 +9,7 @@ import ExerciseVisibilityDrawer from "../components/ExerciseVisibilityDrawer/Exe
 import ExerciseVisibilityMap, {fromProgramBlueprint} from "../models/ExerciseVisibilityMap";
 import {forge} from "@armory/forge/src/Forge";
 import ProgramBlueprint from "@armory/forge/src/blueprints/ProgramBlueprint";
+import ExerciseBlueprint from "@armory/forge/src/blueprints/ExerciseBlueprint";
 
 /*
 export async function getServerSideProps(context) {
@@ -17,14 +18,18 @@ export async function getServerSideProps(context) {
 }
 */
 
-const props = forge();
+const blueprint = forge();
 
 const Home = () => {
-    const [programBlueprint,setProgramBlueprint] = useState(props);
+    const [programBlueprint,setProgramBlueprint] = useState(blueprint);
+    const [programTimeline, setProgramTimeline] = useState(blueprint.getTimeline);
+
     const [modalState,setModalState] = useState({isOpen: false, exerciseId: ''});
     const [isDrawerOpen,setIsDrawerOpen] = useState(false);
     const [isVisibilityDrawerOpen, setIsVisibilityDrawerOpen] = useState(false);
     const [exerciseVisibilityMap, setExerciseVisibilityMap] = useState(fromProgramBlueprint(programBlueprint));
+
+    useEffect(() => setProgramTimeline(programBlueprint.getTimeline()),[programBlueprint]);
 
     function onExerciseClicked(exerciseId: string) {
         setModalState({isOpen: true,exerciseId: exerciseId})
@@ -42,21 +47,25 @@ const Home = () => {
             {
                 onExerciseClicked: (exerciseId) => onExerciseClicked(exerciseId),
                 onExerciseVisibilityChanged: (exerciseId, visible) => onExerciseVisibilityChanged(exerciseId,visible),
-                exerciseVisibilityMap: exerciseVisibilityMap
+                exerciseVisibilityMap: exerciseVisibilityMap,
+                onTrainingMaxChanged: (blueprint: ExerciseBlueprint, reps: number, weight: number) => {
+                    console.log(programBlueprint.updateExerciseTrainingMax(blueprint,weight).blocks.get(0).getExercisesByDays().toJS());
+                    setProgramBlueprint(programBlueprint.updateExerciseTrainingMax(blueprint, weight))
+                }
             }}>
 
-            <Navbar title={props.name}>
+            <Navbar title={programBlueprint.name}>
                 <NavbarIcon iconName="fa-eye" onClick={() => setIsVisibilityDrawerOpen(true)} label={"Exercise visibility"}/>
                 <NavbarIcon iconName="fa-dumbbell" onClick={() => setIsDrawerOpen(true)} label={"Training maxes"}/>
             </Navbar>
-            <TrainingMaxesDrawer isOpen={isDrawerOpen} onRequestClose={() => setIsDrawerOpen(false)}/>
+            <TrainingMaxesDrawer isOpen={isDrawerOpen} onRequestClose={() => setIsDrawerOpen(false)} programBlueprint={programBlueprint}/>
             <ExerciseVisibilityDrawer isOpen={isVisibilityDrawerOpen} onRequestClose={() => setIsVisibilityDrawerOpen(false)} program={programBlueprint}/>
             <ExerciseOverviewModal
                 isOpen={modalState.isOpen}
                 exerciseSummary={programBlueprint.getExerciseOverview(modalState.exerciseId)}
                 onRequestClose={() => setModalState({...modalState,isOpen: false})}
             />
-            <ProgramOverview {...programBlueprint.getTimeline()}/>
+            <ProgramOverview {...programTimeline}/>
         </ProgramOverviewContextProvider>
     )
 };

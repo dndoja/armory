@@ -63,5 +63,14 @@ describe('ProgramBlueprint', () => {
                 })
             })
         });
+    });
+
+    describe('getExerciseBlueprints', () => {
+        it('should return all of the exercise blueprints for each block', () => {
+            const blueprints = blueprint.getExerciseBlueprints();
+            blocks.forEach(block => block.getExerciseBlueprints().forEach(blueprint => {
+                expect(blueprints).toContainEqual(blueprint)
+            }));
+        });
     })
 });

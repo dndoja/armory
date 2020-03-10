@@ -62,6 +62,8 @@ export default class BlockBlueprint {
         return new BlockBlueprint(this.totalWeeks, this.trainingDaysPerWeek, newExercisesMap, this.blueprintToExerciseIdsMap, this.daysToExerciseIdsMatrix)
     };
 
+    getExerciseBlueprints = (): Set<ExerciseBlueprint> => Set.of(...this.blueprintToExerciseIdsMap.keySeq().map(key => key));
+
     getExerciseById = (id: string): ExerciseWithProgression | undefined => this.exercisesMap.get(id);
 
     getExercisesForDay = (day: number): List<ExerciseWithProgression> => this.getExercisesByIds(this.getExerciseIdsForDay(day));
