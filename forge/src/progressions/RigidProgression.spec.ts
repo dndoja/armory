@@ -1,6 +1,6 @@
 import ExerciseSet from "../workout_sets/ExerciseSet";
 import RigidProgression from "./RigidProgression";
-import {mapNTimes} from "../forged/Utilities";
+import {mapNTimes} from "../common/Utilities";
 
 describe('Rigid progression', () => {
     const sets: Array<ExerciseSet> = mapNTimes(2,i => {return{reps: 1 + i, weight: 100 + i}});

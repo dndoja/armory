@@ -1,7 +1,7 @@
 import ExerciseBlueprint from "./ExerciseBlueprint";
 import {List, Map as ImmutableMap, Set} from "immutable";
 import ExerciseWithProgression from "./ExerciseWithProgression";
-import {pushOrSet} from "../forged/Utilities";
+import {pushOrSet} from "../common/Utilities";
 
 export default class BlockBlueprint {
     readonly totalWeeks: number;

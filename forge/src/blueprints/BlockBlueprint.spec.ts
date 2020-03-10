@@ -1,7 +1,7 @@
 import BlockBlueprint from "./BlockBlueprint";
 import RigidProgression from "../progressions/RigidProgression";
 import {mockExercise} from "../Mocks";
-import {mapNTimes} from "../forged/Utilities";
+import {mapNTimes} from "../common/Utilities";
 
 describe('BlockBlueprint', () => {
     const totalWeeks = 8;

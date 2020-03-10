@@ -1,6 +1,6 @@
 import ExerciseBlueprint from "./blueprints/ExerciseBlueprint";
 import {FixedProgression} from "./progressions/FixedProgression";
-import {mapNTimes} from "./forged/Utilities";
+import {mapNTimes} from "./common/Utilities";
 import {createMatrix} from "./common/Matrix";
 import TMaxVaryingSet from "./workout_sets/TMaxVaryingSet";
 import ExerciseWithProgression from "./blueprints/ExerciseWithProgression";

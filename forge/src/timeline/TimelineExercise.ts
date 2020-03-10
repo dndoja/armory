@@ -3,7 +3,7 @@ import ExerciseSet from "../workout_sets/ExerciseSet";
 import BodyPart from "../common/BodyPart";
 import {List} from "immutable";
 
-export default class ForgedExercise implements Exercise{
+export default class TimelineExercise implements Exercise{
     readonly id: string;
     readonly name: string;
     readonly sets: List<ExerciseSet>;

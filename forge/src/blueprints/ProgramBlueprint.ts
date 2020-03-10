@@ -1,9 +1,9 @@
 import BlockBlueprint from "./BlockBlueprint";
 import {List} from "immutable";
-import {ForgedProgram} from "../forged/ForgedProgram";
+import {ProgramTimeline} from "../timeline/ProgramTimeline";
 import ExerciseOverview, {ExerciseOverviewItem} from "../common/ExerciseOverview";
-import {mapNTimes} from "../forged/Utilities";
-import {forgeProgram} from "../forged/Forge";
+import {mapNTimes} from "../common/Utilities";
+import {buildTimeline} from "../timeline/TimelineBuilder";
 import ExerciseBlueprint from "./ExerciseBlueprint";
 import TMaxVaryingSet from "../workout_sets/TMaxVaryingSet";
 import ExerciseWithProgression from "./ExerciseWithProgression";
@@ -18,7 +18,7 @@ export default class ProgramBlueprint {
         this.blocks = List(blocks);
     }
 
-    getTimeline = (): ForgedProgram => forgeProgram(this);
+    getTimeline = (): ProgramTimeline => buildTimeline(this);
 
     getExerciseOverview = (exerciseId: string): ExerciseOverview | undefined => {
         const overviewItemsInProgram: Array<ExerciseOverviewItem> = [];
