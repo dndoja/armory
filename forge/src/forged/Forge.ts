@@ -8,19 +8,19 @@ import {mapNTimes} from "./Utilities";
 const forgeExercises = (blueprint: BlockBlueprint, day: number, week: number): List<ForgedExercise> => {
     return blueprint.getExercisesForDay(day).map(exercise => {
         const sets = exercise.progression.getSetsAtWeek(week);
-        return new ForgedExercise(exercise.id,exercise.name,sets)
+        return new ForgedExercise(exercise.id, exercise.name, sets)
     });
 };
 
 const forgeDays = (blueprint: BlockBlueprint, week: number): List<ForgedDay> => {
     return List(mapNTimes(blueprint.trainingDaysPerWeek, day => {
-        return {exercises: forgeExercises(blueprint,day,week)}
+        return {exercises: forgeExercises(blueprint, day, week)}
     }));
 };
 
 const forgeWeeks = (blueprint: BlockBlueprint): List<ForgedWeek> => {
     return List(mapNTimes(blueprint.totalWeeks, week => {
-        return {days: forgeDays(blueprint,week)}
+        return {days: forgeDays(blueprint, week)}
     }));
 };
 
@@ -28,6 +28,8 @@ const forgeBlock = (blueprint: BlockBlueprint): ForgedBlock => {
     return {weeks: forgeWeeks(blueprint)}
 };
 
-const forgeProgram = (programBlueprint: ProgramBlueprint): ForgedProgram => programBlueprint.structured();
+const forgeProgram = (programBlueprint: ProgramBlueprint): ForgedProgram => {
+    return {name: programBlueprint.name, blocks: programBlueprint.blocks.map(block => forgeBlock(block))}
+};
 
-export { forgeProgram };
+export {forgeProgram};

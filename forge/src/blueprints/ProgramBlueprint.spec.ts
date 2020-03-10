@@ -3,6 +3,7 @@ import ProgramBlueprint from "./ProgramBlueprint";
 import BlockBlueprint from "./BlockBlueprint";
 import ExerciseBlueprint from "./ExerciseBlueprint";
 import {mockExercise} from "../Mocks";
+import {forgeProgram} from "../forged/Forge";
 
 const weeksPerBlock = 7;
 const primaryExercise = mockExercise('primary', 100, weeksPerBlock);
@@ -15,6 +16,12 @@ describe('ProgramBlueprint', () => {
     const blocks = [mockBlock(),mockBlock()];
     const blueprint = new ProgramBlueprint('asd', ...blocks);
 
+    describe("structured", () =>{
+        it('should return a timeline of the program by calling the forge method', function () {
+            const forged = forgeProgram(blueprint);
+            expect(blueprint.getTimeline()).toEqual(forged);
+        });
+    });
     describe("getExerciseOverview", () => {
         const overview = blueprint.getExerciseOverview(primaryExercise.id)!;
 

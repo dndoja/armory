@@ -8,10 +8,18 @@ describe('BlockBlueprint', () => {
     const trainingMax = 100;
     const mainExercise = mockExercise('main', trainingMax, totalWeeks);
     const dummyExercise = mockExercise('dummy',80,totalWeeks);
+    const days = 3;
 
-    const blockBlueprint = BlockBlueprint.make(totalWeeks,3,{exercise: mainExercise, day: 0}, {exercise: dummyExercise, day: 1});
+    const blockBlueprint = BlockBlueprint.make(totalWeeks,days,{exercise: mainExercise, day: 0}, {exercise: dummyExercise, day: 1});
     const exercisesAtDay1 = blockBlueprint.getExercisesForDay(0);
     const exercisesAtDay2 = blockBlueprint.getExercisesForDay(1);
+
+    it('should create an empty block if no exercises are specified', () => {
+        const emptyBlock = BlockBlueprint.make(8,days);
+        for (let day = 0; day < days; day++) {
+            expect(emptyBlock.getExercisesForDay(day).size).toBe(0)
+        }
+    });
 
     it('should add an exercise and its\' sets correctly in a given day',() => {
         expect(exercisesAtDay1.get(0)).toEqual(mainExercise);

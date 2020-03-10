@@ -18,7 +18,7 @@ export default class ProgramBlueprint {
         this.blocks = List(blocks);
     }
 
-    structured = (): ForgedProgram => forgeProgram(this);
+    getTimeline = (): ForgedProgram => forgeProgram(this);
 
     getExerciseOverview = (exerciseId: string): ExerciseOverview | undefined => {
         const overviewItemsInProgram: Array<ExerciseOverviewItem> = [];

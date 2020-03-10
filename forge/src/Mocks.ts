@@ -4,6 +4,7 @@ import {mapNTimes} from "./forged/Utilities";
 import {createMatrix} from "./common/Matrix";
 import TMaxVaryingSet from "./workout_sets/TMaxVaryingSet";
 import ExerciseWithProgression from "./blueprints/ExerciseWithProgression";
+import BlockBlueprint from "./blueprints/BlockBlueprint";
 
 export const mockExercise = (name: string, trainingMax: number, weeksPerformedFor: number, id?: string) => new ExerciseWithProgression(
     new ExerciseBlueprint(name,trainingMax),
@@ -18,3 +19,13 @@ export const mockFixedProgression = (weeks: number, trainingMax: number): FixedP
     ]))
 );
 
+export const mockBlock = (weeks: number, trainingDaysPerWeek: number): BlockBlueprint => {
+    const exercisesInDays = mapNTimes(trainingDaysPerWeek, () => mapNTimes(6, i => mockExercise('Exercise ' + i, (i + 1) * 20, weeks)));
+    const flat: Array<{exercise: ExerciseWithProgression, day: number}> = [];
+    exercisesInDays.forEach((exercises, index) => {
+        flat.push(...exercises.map(e => {
+            return {exercise: e, day: index}
+        }))
+    });
+    return BlockBlueprint.make(weeks, trainingDaysPerWeek, ...flat);
+};

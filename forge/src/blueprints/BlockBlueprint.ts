@@ -13,9 +13,9 @@ export default class BlockBlueprint {
     private constructor(
         totalWeeks: number,
         trainingDaysPerWeek: number,
-        exercisesMap: ImmutableMap<string, ExerciseWithProgression> = ImmutableMap(),
-        blueprintToExercisesMap: ImmutableMap<ExerciseBlueprint, Set<string>> = ImmutableMap(),
-        daysToExercisesMap: ImmutableMap<number, Set<string>> = ImmutableMap()
+        exercisesMap: ImmutableMap<string, ExerciseWithProgression>,
+        blueprintToExercisesMap: ImmutableMap<ExerciseBlueprint, Set<string>>,
+        daysToExercisesMap: ImmutableMap<number, Set<string>>
     ) {
         this.totalWeeks = totalWeeks;
         this.trainingDaysPerWeek = trainingDaysPerWeek;

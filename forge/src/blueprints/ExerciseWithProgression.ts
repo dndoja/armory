@@ -4,7 +4,6 @@ import Exercise from "../common/Exercise";
 import Progression from "../progressions/Progression";
 import ExerciseBlueprint from "./ExerciseBlueprint";
 
-//todo find a better name
 export default class ExerciseWithProgression implements Exercise{
     readonly blueprint: ExerciseBlueprint;
     readonly id: string;
