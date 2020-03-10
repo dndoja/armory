@@ -1,36 +1,43 @@
 import ExerciseBlueprint from "./ExerciseBlueprint";
-import {List, Map, Set} from "immutable";
+import {List, Map as ImmutableMap, Set} from "immutable";
 import ExerciseWithProgression from "./ExerciseWithProgression";
-import TMaxVaryingSet from "../workout_sets/TMaxVaryingSet";
-import Progression from "../progressions/Progression";
+import {pushOrSet} from "../forged/Utilities";
 
 export default class BlockBlueprint {
     readonly totalWeeks: number;
     readonly trainingDaysPerWeek: number;
-    private readonly exercisesMap: Map<string, ExerciseWithProgression>;
-    private readonly blueprintToExerciseIdsMap: Map<ExerciseBlueprint, Set<string>>;
-    private readonly daysToExerciseIdsMatrix: Map<number, Set<string>>;
+    private readonly exercisesMap: ImmutableMap<string, ExerciseWithProgression>;
+    private readonly blueprintToExerciseIdsMap: ImmutableMap<ExerciseBlueprint, Set<string>>;
+    private readonly daysToExerciseIdsMatrix: ImmutableMap<number, Set<string>>;
 
     private constructor(
         totalWeeks: number,
         trainingDaysPerWeek: number,
-        exercisesMap: Map<string, ExerciseWithProgression> = Map(),
-        blueprintToExercisesMap: Map<ExerciseBlueprint, Set<string>> = Map(),
-        daysToExercisesMatrix: Map<number, Set<string>> = Map()
+        exercisesMap: ImmutableMap<string, ExerciseWithProgression> = ImmutableMap(),
+        blueprintToExercisesMap: ImmutableMap<ExerciseBlueprint, Set<string>> = ImmutableMap(),
+        daysToExercisesMap: ImmutableMap<number, Set<string>> = ImmutableMap()
     ) {
         this.totalWeeks = totalWeeks;
         this.trainingDaysPerWeek = trainingDaysPerWeek;
         this.exercisesMap = exercisesMap;
         this.blueprintToExerciseIdsMap = blueprintToExercisesMap;
-        this.daysToExerciseIdsMatrix = daysToExercisesMatrix;
+        this.daysToExerciseIdsMatrix = daysToExercisesMap;
     }
 
-    static make = (totalWeeks: number, trainingDaysPerWeek: number, ...exercises:{blueprint: ExerciseBlueprint, progression: Progression}[]): BlockBlueprint => {
-        //todo do something with the exercises
-        return new BlockBlueprint(totalWeeks,trainingDaysPerWeek);
+    static make = (totalWeeks: number, trainingDaysPerWeek: number, ...exercisesAtDays:{exercise: ExerciseWithProgression, day: number}[]): BlockBlueprint => {
+        const exercisesMap:{[exerciseId:string]: ExerciseWithProgression} = {};
+        const blueprintToExercisesMap: Map<ExerciseBlueprint, Set<string>> = new Map();
+        const daysToExercisesMap: Map<number, Set<string>> = new Map();
+        exercisesAtDays.forEach(exerciseData => {
+            const exerciseId = exerciseData.exercise.id;
+            exercisesMap[exerciseId] = exerciseData.exercise;
+            pushOrSet(blueprintToExercisesMap, exerciseData.exercise.blueprint, exerciseId);
+            pushOrSet(daysToExercisesMap, exerciseData.day, exerciseId)
+        });
+        return new BlockBlueprint(totalWeeks,trainingDaysPerWeek, ImmutableMap(exercisesMap), ImmutableMap(blueprintToExercisesMap), ImmutableMap(daysToExercisesMap));
     };
 
-    withExercise = (exerciseWithProgression: ExerciseWithProgression, day: number): BlockBlueprint => {
+    addExercise = (exerciseWithProgression: ExerciseWithProgression, day: number): BlockBlueprint => {
         const exerciseId = exerciseWithProgression.id;
 
         const newExercises = this.exercisesMap.set(exerciseId, exerciseWithProgression);

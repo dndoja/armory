@@ -8,8 +8,8 @@ const weeksPerBlock = 7;
 const primaryExercise = mockExercise('primary', 100, weeksPerBlock);
 
 const mockBlock = (): BlockBlueprint => BlockBlueprint.make(weeksPerBlock,3)
-    .withExercise(primaryExercise,0)
-    .withExercise(mockExercise('dummy', 10,weeksPerBlock),0);
+    .addExercise(primaryExercise,0)
+    .addExercise(mockExercise('dummy', 10,weeksPerBlock),0);
 
 describe('ProgramBlueprint', () => {
     const blocks = [mockBlock(),mockBlock()];

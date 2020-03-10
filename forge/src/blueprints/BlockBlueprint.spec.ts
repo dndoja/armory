@@ -1,22 +1,21 @@
 import BlockBlueprint from "./BlockBlueprint";
 import RigidProgression from "../progressions/RigidProgression";
 import {mockExercise} from "../Mocks";
+import {mapNTimes} from "../forged/Utilities";
 
 describe('BlockBlueprint', () => {
-    const day = 2;
     const totalWeeks = 8;
     const trainingMax = 100;
     const mainExercise = mockExercise('main', trainingMax, totalWeeks);
     const dummyExercise = mockExercise('dummy',80,totalWeeks);
 
-    const blockBlueprint = BlockBlueprint.make(totalWeeks,3)
-        .withExercise(mainExercise,day)
-        .withExercise(dummyExercise,day);
-
-    const exercisesAtDay = blockBlueprint.getExercisesForDay(day);
+    const blockBlueprint = BlockBlueprint.make(totalWeeks,3,{exercise: mainExercise, day: 0}, {exercise: dummyExercise, day: 1});
+    const exercisesAtDay1 = blockBlueprint.getExercisesForDay(0);
+    const exercisesAtDay2 = blockBlueprint.getExercisesForDay(1);
 
     it('should add an exercise and its\' sets correctly in a given day',() => {
-        expect(exercisesAtDay.get(0)).toEqual(mainExercise);
+        expect(exercisesAtDay1.get(0)).toEqual(mainExercise);
+        expect(exercisesAtDay2.get(0)).toEqual(dummyExercise);
     });
 
     it('should correctly return an exercise by it\'s id', () => {
