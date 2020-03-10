@@ -1,17 +1,17 @@
-import {ForgedProgram} from "@armory/forge/src/forged/ForgedProgram";
+import ProgramBlueprint from "@armory/forge/src/blueprints/ProgramBlueprint";
 
 interface ExerciseVisibilityMap {
     [key:string]: {visible: boolean, name: string}
 }
 
-export function fromProgram(program: ForgedProgram): ExerciseVisibilityMap {
+export function fromProgramBlueprint(program: ProgramBlueprint): ExerciseVisibilityMap {
     const visibilityMap: ExerciseVisibilityMap = {};
+
     program.blocks.forEach(block => {
-        block.weeks.forEach(week => week.days.forEach(workout => {
-            workout.exercises.forEach(exercise => {
-                visibilityMap[exercise.id] = {visible:true,name:exercise.name};
-            })
-        }))});
+        for (let day = 0; day < block.trainingDaysPerWeek; day++){
+            block.getExercisesForDay(day).forEach(exercise => visibilityMap[exercise.id] = {visible: true,name: exercise.name})
+        }
+    });
 
     return visibilityMap;
 }

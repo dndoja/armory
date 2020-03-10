@@ -1,4 +1,4 @@
-import * as css from "./visibility_toggle.scss"
+import styles from "./visibility_toggle.module.scss"
 import {useEffect, useState} from "react";
 import {func} from "prop-types";
 
@@ -19,14 +19,14 @@ const VisibilityToggle = (props: VisibilityToggleProps) => {
     }
 
     return (
-        <div className={css.container}>
+        <div className={styles.container}>
             {
                 props.toggledOn ?
-                    <i className={css.icon + " " + css.toggledOn + " fas fa-eye"} onClick={onToggleClicked}/>
+                    <i className={styles.icon + " " + styles.toggledOn + " fas fa-eye"} onClick={onToggleClicked}/>
                     :
-                    <i className={css.icon + " " + css.toggledOff + " fas fa-eye-slash"} onClick={onToggleClicked}/>
+                    <i className={styles.icon + " " + styles.toggledOff + " fas fa-eye-slash"} onClick={onToggleClicked}/>
             }
-            <p className={props.toggledOn ? css.toggledOn : css.toggledOff}>{props.label}</p>
+            <p className={props.toggledOn ? styles.toggledOn : styles.toggledOff}>{props.label}</p>
         </div>
     );
 };

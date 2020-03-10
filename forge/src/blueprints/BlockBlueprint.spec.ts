@@ -26,6 +26,12 @@ describe('BlockBlueprint', () => {
         expect(exercisesAtDay2.get(0)).toEqual(dummyExercise);
     });
 
+    it('should correctly return all the exercises grouped by day', () => {
+        const groupedByDay = blockBlueprint.getExercisesByDays();
+        expect(groupedByDay.get(0)!.get(0)).toEqual(mainExercise);
+        expect(groupedByDay.get(1)!.get(0)).toEqual(dummyExercise)
+    });
+
     it('should correctly return an exercise by it\'s id', () => {
         expect(blockBlueprint.getExerciseById(mainExercise.id)).toBe(mainExercise);
         expect(blockBlueprint.getExerciseById('1234')).toBeUndefined();

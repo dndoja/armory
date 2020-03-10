@@ -1,4 +1,4 @@
-@import "public/styles/styles";
+@import "public/styles/common";
 
 $nestingOffset: 16px;
 
@@ -6,6 +6,7 @@ $nestingOffset: 16px;
   display:flex;
   flex-direction: row;
   padding-left: $nestingOffset;
+  padding-bottom: 32px;
 }
 
 .sectionTitle{

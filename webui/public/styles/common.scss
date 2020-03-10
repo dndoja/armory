@@ -1,10 +1,5 @@
 @import "variables";
 
-:global(body) {
-  background-color: $background;
-  padding-top: 50px;
-}
-
 @mixin regular-text{
   font-family: $font;
   color: $textColor;

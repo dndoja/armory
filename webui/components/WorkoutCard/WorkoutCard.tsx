@@ -1,15 +1,15 @@
-import * as css from "./workout_card.scss"
+import styles from "./workout_card.module.scss"
 import WorkoutCardRow from "./WorkoutCardRow";
-import {ForgedDay} from "@armory/forge/src/forged/ForgedProgram";
+import {TimelineDay} from "@armory/forge/src/timeline/ProgramTimeline";
 
 type WorkoutCardProps = {
-    workout: ForgedDay,
+    workout: TimelineDay,
 }
 
 const WorkoutCard = (props: WorkoutCardProps) => {
     const exercises = props.workout.exercises;
     return(
-        <div className={css.card}>
+        <div className={styles.card}>
             {
                 exercises.map((value,index) => <WorkoutCardRow
                         key={index}

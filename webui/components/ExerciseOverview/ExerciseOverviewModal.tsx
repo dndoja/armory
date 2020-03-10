@@ -1,9 +1,9 @@
-import ExerciseOverview from "@armory/forge/src/ExerciseOverview";
-import * as css from "./exercise_overview.scss";
+import styles from "./exercise_overview.module.scss";
 import SetBubble from "../SetBubble/SetBubble";
 import Modal from 'react-modal';
 import ModalProps from "../../models/ModalProps";
 import {Scrollbar} from "react-scrollbars-custom";
+import ExerciseOverview from "@armory/forge/src/common/ExerciseOverview";
 
 const modalStyle = {
     overlay: {
@@ -33,19 +33,19 @@ class ExerciseOverviewModalProps implements ModalProps{
 
 const ExerciseOverviewModal = (props: ExerciseOverviewModalProps) => {
     return (
-        props.exerciseSummary &&
+        props.exerciseSummary ?
         <Modal isOpen={props.isOpen} onRequestClose={() => props.onRequestClose()} style={modalStyle}>
-            <div className={css.container}>
-                <p className={css.title}>{props.exerciseSummary.name}</p>
-                <div className={css.content}>
+            <div className={styles.container}>
+                <p className={styles.title}>{props.exerciseSummary.name}</p>
+                <div className={styles.content}>
                     <Scrollbar>
                     {
-                        props.exerciseSummary.sets.map(value => <div className={css.row}>
-                            <p className={css.label}>{value[0]}</p>
+                        props.exerciseSummary.items.map(item => <div className={styles.row}>
+                            <p className={styles.label}>{'Week ' + (item.week + 1)}</p>
                             <div style={{flex: 1}}>
-                                <div className={css.bubbles}>
+                                <div className={styles.bubbles}>
                                     {
-                                        value[1].map(set => <SetBubble set={set}/>)
+                                        item.sets.map(set => <SetBubble set={set}/>)
                                     }
                                 </div>
                             </div>
@@ -54,7 +54,7 @@ const ExerciseOverviewModal = (props: ExerciseOverviewModalProps) => {
                     </Scrollbar>
                 </div>
             </div>
-        </Modal>
+        </Modal> : null
     )
 };
 

@@ -1,7 +1,5 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
-import "../public/styles/styles.scss"
-import "../public/styles/input.scss"
 
 export default class CustomDocument extends Document {
     render () {

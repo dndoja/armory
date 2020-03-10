@@ -1,4 +1,4 @@
-import * as css from "./navbar.scss"
+import styles from "./navbar.module.scss"
 
 type NavbarIconProps = {
     label: string,
@@ -6,10 +6,10 @@ type NavbarIconProps = {
     onClick: () => void
 }
 
-const NavbarIcon = (props: NavbarIconProps) => <i className={"fas " + css.icon + " " + props.iconName}
+const NavbarIcon = (props: NavbarIconProps) => <i className={"fas " + styles.icon + " " + props.iconName}
                                                   onClick={() => props.onClick()}
 >
-    <span className={css.tooltipText}>{props.label}</span>
+    <span className={styles.tooltipText}>{props.label}</span>
 </i>;
 
 export default NavbarIcon;

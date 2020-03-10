@@ -1,16 +1,16 @@
-import {FunctionComponent, useContext, useState} from "react";
+import {FunctionComponent, useContext} from "react";
 import Drawer, {DrawerType} from "../Drawer/Drawer";
 import ModalProps from "../../models/ModalProps";
 import VisibilityToggle from "./VisibilityToggle/VisibilityToggle";
 import ProgramOverviewContext from "../../screens/ProgramOverview/ProgramOverviewContext";
 import Section from "../Section/Section";
-import * as css from "./exercise_visibility_drawer.scss"
-import {ForgedProgram} from "@armory/forge/src/forged/ForgedProgram";
+import styles from "./exercise_visibility_drawer.module.scss"
+import ProgramBlueprint from "@armory/forge/src/blueprints/ProgramBlueprint";
 
-class TrainingMaxesDrawerProps implements ModalProps{
+class TrainingMaxesDrawerProps implements ModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
-    program: ForgedProgram
+    program: ProgramBlueprint
 }
 
 const ExerciseVisibilityDrawer: FunctionComponent<TrainingMaxesDrawerProps> = (props) => {
@@ -20,29 +20,27 @@ const ExerciseVisibilityDrawer: FunctionComponent<TrainingMaxesDrawerProps> = (p
 
     return (
         <Drawer {...props} title={"Exercise visibility"} subtitle={"Hide/show exercises"} type={DrawerType.HORIZONTAL}>
-            <div style={{width:'100%'}}>
+            <div style={{width: '100%'}}>
                 {
-                    blocks.map((block,blockIndex) => {
+                    blocks.map((block, blockIndex) => {
                         return (
-                            <Section title={blocks.length > 1 ? 'Block ' + (blockIndex + 1) : undefined}>
-                                <div className={css.content}>
-                                {
-                                    block.weeks[0].days.map((workout, index) => {
-                                        return (
-                                            <div className={css.column}>
-                                                <p className={css.dayLabel}>Day {index + 1}</p>
-                                                {
-                                                    workout.exercises.map(exercise => <VisibilityToggle
-                                                        key={exercise.id}
-                                                        toggledOn={visibilityMap[exercise.id].visible}
-                                                        label={exercise.name}
-                                                        onChange={value => context.onExerciseVisibilityChanged(exercise.id, value)}
-                                                    />)
-                                                }
+                            <Section title={blocks.size > 1 ? 'Block ' + (blockIndex + 1) : undefined}>
+                                <div className={styles.content}>
+                                    {
+                                        block.getExercisesByDays().valueSeq().map((exercises, day) => <div className={styles.column}>
+                                            <p className={styles.dayLabel}>Day {day + 1}</p>
+                                            <div>
+                                            {
+                                                exercises.map(exercise => <VisibilityToggle
+                                                    key={exercise.id}
+                                                    toggledOn={visibilityMap[exercise.id].visible}
+                                                    label={exercise.name}
+                                                    onChange={value => context.onExerciseVisibilityChanged(exercise.id, value)}
+                                                />)
+                                            }
                                             </div>
-                                        )
-                                    })
-                                }
+                                        </div>)
+                                    }
                                 </div>
                             </Section>
                         )

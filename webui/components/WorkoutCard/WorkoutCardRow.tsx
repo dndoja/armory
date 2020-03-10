@@ -1,11 +1,11 @@
-import * as css from "./workout_card.scss";
+import styles from "./workout_card.module.scss";
 import SetBubble from "../SetBubble/SetBubble";
 import {useContext} from "react";
 import ProgramOverviewContext from "../../screens/ProgramOverview/ProgramOverviewContext";
-import ForgedExercise from "@armory/forge/src/forged/ForgedExercise";
+import TimelineExercise from "@armory/forge/src/timeline/TimelineExercise";
 
 type WorkoutCardRowProps = {
-    exercise: ForgedExercise,
+    exercise: TimelineExercise,
 }
 
 const WorkoutCardRow = (props: WorkoutCardRowProps) => {
@@ -15,9 +15,9 @@ const WorkoutCardRow = (props: WorkoutCardRowProps) => {
 
     return (
         id in visibilityMap && visibilityMap[id].visible ?
-        <div className={css.row}>
-            <p className={css.exerciseName} onClick={() => context.onExerciseClicked(props.exercise.id)}>{props.exercise.name}</p>
-            <div className={css.bubbles}>
+        <div className={styles.row}>
+            <p className={styles.exerciseName} onClick={() => context.onExerciseClicked(props.exercise.id)}>{props.exercise.name}</p>
+            <div className={styles.bubbles}>
                 {
                     props.exercise.sets.map((value,index) => {
                         return(

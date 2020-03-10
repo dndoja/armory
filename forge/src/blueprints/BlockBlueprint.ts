@@ -2,6 +2,7 @@ import ExerciseBlueprint from "./ExerciseBlueprint";
 import {List, Map as ImmutableMap, Set} from "immutable";
 import ExerciseWithProgression from "./ExerciseWithProgression";
 import {pushOrSet} from "../common/Utilities";
+import Matrix, {createMatrix} from "../common/Matrix";
 
 export default class BlockBlueprint {
     readonly totalWeeks: number;
@@ -64,6 +65,8 @@ export default class BlockBlueprint {
     getExerciseById = (id: string): ExerciseWithProgression | undefined => this.exercisesMap.get(id);
 
     getExercisesForDay = (day: number): List<ExerciseWithProgression> => this.getExercisesByIds(this.getExerciseIdsForDay(day));
+
+    getExercisesByDays = (): ImmutableMap<number,List<ExerciseWithProgression>> => this.daysToExerciseIdsMatrix.map(value => value.map(id => this.exercisesMap.get(id)!).toList());
 
     getExercisesForBlueprint = (blueprint: ExerciseBlueprint): List<ExerciseWithProgression> => this.getExercisesByIds(this.getExerciseIdsForBlueprint(blueprint));
 

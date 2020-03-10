@@ -36,7 +36,7 @@ describe('ProgramBlueprint', () => {
         });
 
         it('should return every set of an exercise for every week in each block', () => {
-            overview.sets.forEach(item => {
+            overview.items.forEach(item => {
                 const exercise = blocks[item.block].getExerciseById(primaryExercise.id)!;
                 expect(item.sets).toEqual(exercise.progression.getSetsAtWeek(item.week));
             });

@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import * as css from "./drawer.scss";
+import styles from "./drawer.module.scss";
 import ModalProps from "../../models/ModalProps";
 import {Scrollbar} from "react-scrollbars-custom";
 import {func} from "prop-types";
@@ -17,9 +17,9 @@ export class DrawerProps implements ModalProps{
 
 function getDrawerClass(type: DrawerType, isOpen: boolean): string {
     if (type === DrawerType.VERTICAL){
-        return isOpen === true ? css.verticalOpen : css.verticalClosed;
+        return isOpen === true ? styles.verticalOpen : styles.verticalClosed;
     }else{
-        return isOpen === true ? css.horizontalOpen : css.horizontalClosed;
+        return isOpen === true ? styles.horizontalOpen : styles.horizontalClosed;
     }
 }
 
@@ -28,14 +28,14 @@ const Drawer: FunctionComponent<DrawerProps> = (props) => {
 
     return(
         <div className={getDrawerClass(drawerType,props.isOpen)}>
-                <div className={css.content}>
-                    <div className={css.headerContainer}>
-                        <p className={css.title}>{props.title ?? null}</p>
-                        <i className={css.closeIcon + " fas fa-times"} onClick={() => props.onRequestClose()}/>
+                <div className={styles.content}>
+                    <div className={styles.headerContainer}>
+                        <p className={styles.title}>{props.title ?? null}</p>
+                        <i className={styles.closeIcon + " fas fa-times"} onClick={() => props.onRequestClose()}/>
                     </div>
-                    <p className={css.subtitle}>{props.subtitle ?? null}</p>
+                    <p className={styles.subtitle}>{props.subtitle ?? null}</p>
 
-                    <div className={css.innerContent}>
+                    <div className={styles.innerContent}>
                         <Scrollbar>
                             {props.children}
                         </Scrollbar>

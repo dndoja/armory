@@ -1,5 +1,5 @@
-import * as css from "./divider.scss"
+import styles from "./divider.module.scss"
 
-const Divider = () => <h2 className={css.divider}/>;
+const Divider = () => <h2 className={styles.divider}/>;
 
 export default Divider;

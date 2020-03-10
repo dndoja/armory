@@ -1,4 +1,4 @@
-import * as css from "./training_maxes_drawer.scss"
+import styles from "./training_maxes_drawer.module.scss"
 import {useEffect, useState} from "react";
 
 type RepsWeightFieldProps = {
@@ -21,19 +21,19 @@ const RepsWeightField = (props: RepsWeightFieldProps) => {
 
     return(
         <div>
-            <p className={css.exerciseName}>{props.exerciseName}</p>
-            <div className={css.repsWeightContainer}>
+            <p className={styles.exerciseName}>{props.exerciseName}</p>
+            <div className={styles.repsWeightContainer}>
                 <input
-                    className={css.input}
+                    className={styles.input}
                     type={"number"}
                     placeholder={"Reps"}
                     min="1"
                     onChange={event => setState({...state, reps: event.target.value})}
                     value={state.reps}
                 />
-                <h4 className={css.xSeparator}>X</h4>
+                <h4 className={styles.xSeparator}>X</h4>
                 <input
-                    className={css.input}
+                    className={styles.input}
                     type={"number"}
                     placeholder={"Weight"}
                     min={step.toString()}
@@ -41,7 +41,7 @@ const RepsWeightField = (props: RepsWeightFieldProps) => {
                     value={state.weight}
                     step={step}
                 />
-                <h4 className={css.xSeparator}>kg</h4>
+                <h4 className={styles.xSeparator}>kg</h4>
             </div>
         </div>
     );

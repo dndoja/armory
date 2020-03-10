@@ -1,5 +1,5 @@
 import {FunctionComponent, useState} from "react";
-import * as css from './section.scss';
+import styles from './section.module.scss';
 import {useSpring, animated} from "react-spring";
 
 type SectionProps = {
@@ -26,15 +26,15 @@ const Section: FunctionComponent<SectionProps> = (props) => {
     };
 
     return (
-    <div className={css.container}>
+    <div className={styles.container}>
         {
             props.title &&
-                <div className={css.titleContainer} >
-                     {isCollapsable && <animated.div className={css.arrow} style={rotateSpring} onClick={onTitleClick}/>}
-                     <p className={isCollapsable ? css.sectionTitleClickable : css.sectionTitle} onClick={onTitleClick}>{props.title}</p>
+                <div className={styles.titleContainer} >
+                     {isCollapsable && <animated.div className={styles.arrow} style={rotateSpring} onClick={onTitleClick}/>}
+                     <p className={isCollapsable ? styles.sectionTitleClickable : styles.sectionTitle} onClick={onTitleClick}>{props.title}</p>
                 </div>
         }
-        <div className={css.content}>
+        <div className={styles.content}>
             <div style={{overflowY: 'hidden', maxHeight: isExpanded ? '100%' : '0'}}>{props.children}</div>
         </div>
     </div>

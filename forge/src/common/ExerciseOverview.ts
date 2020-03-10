@@ -12,11 +12,11 @@ export {ExerciseOverviewItem}
 class ExerciseOverview{
     readonly id: string;
     readonly name: string;
-    readonly sets: List<ExerciseOverviewItem>;
+    readonly items: List<ExerciseOverviewItem>;
 
     constructor(id: string, name: string, sets: List<ExerciseOverviewItem>) {
         this.name = name;
-        this.sets = sets;
+        this.items = sets;
         this.id = id;
     }
 }

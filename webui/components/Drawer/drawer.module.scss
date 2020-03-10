@@ -1,7 +1,8 @@
-@import "public/styles/styles";
+@import "public/styles/common";
 
 $drawerWidth: 25vw;
 $drawerHeight: 70%;
+$animationLength: 0.3s;
 
 .title{
   @include medium-text;
@@ -55,7 +56,7 @@ $drawerHeight: 70%;
   width: $drawerWidth;
   top: 0;
   bottom: 0;
-  transition: right 0.1s ease-out;
+  transition: right $animationLength ease-out;
 }
 
 @mixin drawerHorizontal{
@@ -63,7 +64,7 @@ $drawerHeight: 70%;
   height: $drawerHeight;
   right: 0;
   left: 0;
-  transition: top 0.1s ease-out;
+  transition: top $animationLength ease-out;
 }
 
 .verticalOpen{

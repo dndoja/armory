@@ -1,13 +1,13 @@
 import Section from "../../components/Section/Section";
 import WorkoutCard from "../../components/WorkoutCard/WorkoutCard";
 import Divider from "../../components/Divider/Divider";
-import {ForgedProgram} from "@armory/forge/src/forged/ForgedProgram";
+import {ProgramTimeline} from "@armory/forge/src/timeline/ProgramTimeline";
 
-const ProgramOverview = (props: ForgedProgram) => <div>
+const ProgramOverview = (props: ProgramTimeline) => <div>
     {
-        props.blocks.map(block => {
+        props.blocks.map((block,blockIndex) => {
             return (
-                <Section title={'Block 1'} isCollapsable={props.blocks.length > 1}>
+                <Section title={'Block ' + (blockIndex + 1)} isCollapsable={props.blocks.size > 1}>
                     {
                         block.weeks.map((week,index) => {
                             return (
@@ -17,7 +17,7 @@ const ProgramOverview = (props: ForgedProgram) => <div>
                                             {
                                                 week.days.map((workout,index) => [
                                                      <WorkoutCard workout={workout}/>,
-                                                    index < week.days.length -1 ? <Divider/> : null
+                                                    index < week.days.size -1 ? <Divider/> : null
                                                 ])
                                             }
                                         </div>
