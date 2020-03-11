@@ -57,7 +57,7 @@ describe('ProgramBlueprint', () => {
                 block.getExercisesForBlueprint(primaryExercise.blueprint).forEach(exercise => {
                     exercise.progression.getAllSets().forEach(set => {
                         if (set instanceof TMaxVaryingSet){
-                            expect(set.trainingMax).toBe(newTrainingMax)
+                            expect(set.trainingMax).toBe(newTrainingMax);
                         }
                     })
                 })

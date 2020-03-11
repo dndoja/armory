@@ -1,5 +1,5 @@
 import styles from "./training_maxes_drawer.module.scss"
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 type RepsWeightFieldProps = {
     exerciseName: string

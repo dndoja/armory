@@ -23,8 +23,8 @@ export const mockFixedProgression = (weeks: number, trainingMax: number): FixedP
     ]))
 );
 
-export const mockBlock = (weeks: number, trainingDaysPerWeek: number): BlockBlueprint => {
-    const exercisesInDays = mapNTimes(trainingDaysPerWeek, () => mapNTimes(6, i => mockExercise('Exercise ' + i, (i + 1) * 20, weeks)));
+export const mockBlock = (weeks: number, trainingDaysPerWeek: number, blockIndex: number): BlockBlueprint => {
+    const exercisesInDays = mapNTimes(trainingDaysPerWeek, week => mapNTimes(6, i => mockExercise('Exercise ' + i +'b' + blockIndex + 'w' + week, (i + 1) * 20, weeks)));
     const flat: Array<{ exercise: ExerciseWithProgression, day: number }> = [];
     exercisesInDays.forEach((exercises, index) => {
         flat.push(...exercises.map(e => {
@@ -36,5 +36,5 @@ export const mockBlock = (weeks: number, trainingDaysPerWeek: number): BlockBlue
 
 export const mockProgram = (name: string, blocks: number = 1, weeksPerBlock: number, daysPerWeek: number): ProgramBlueprint => new ProgramBlueprint(
     name,
-    ...mapNTimes(blocks, () => mockBlock(weeksPerBlock,daysPerWeek))
+    ...mapNTimes(blocks, index => mockBlock(weeksPerBlock,daysPerWeek,index))
 );
